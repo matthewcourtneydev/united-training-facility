@@ -1,15 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import { navigation } from "@/data/navigation";
 import Container from "@/components/ui/Container";
 
 const footerNav = [
-  { label: "About", href: "/about" },
-  { label: "The United Way", href: "/united-way" },
-  { label: "Coaches", href: "/coaches" },
-  { label: "Schedule", href: "/schedule" },
+  ...navigation,
   { label: "Join the Room", href: "/join-the-room" },
-  { label: "Contact", href: "/contact" },
 ];
 
 export default function Footer() {
@@ -37,9 +33,9 @@ export default function Footer() {
             </p>
 
             <p className="mt-4 max-w-md text-sm leading-7 text-neutral-500">
-              United Training Facility brings wrestlers together from across
-              the Northern Tier of Pennsylvania and Southern Tier of New York
-              to grow as athletes, teammates, leaders, and people.
+              United Training Facility brings wrestlers together from across the
+              Northern Tier of Pennsylvania and Southern Tier of New York to
+              grow as athletes, teammates, leaders, and people.
             </p>
           </div>
 
