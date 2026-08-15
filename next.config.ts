@@ -1,9 +1,17 @@
-import path from "path";
+import type { NextConfig } from "next";
 
-const nextConfig = {
-  turbopack: {
-    root: path.join(__dirname),
+
+const isProd = process.env.NODE_ENV === "production";
+
+const nextConfig: NextConfig = {
+  output: "export",
+
+  images: {
+    unoptimized: true,
   },
+
+  basePath: isProd ? "/united-training-facility" : "",
+  assetPrefix: isProd ? "/united-training-facility/" : "",
 };
 
 export default nextConfig;
