@@ -15,7 +15,7 @@ export default function CoachesPage() {
       {/* Hero */}
       <section className="relative min-h-[520px] overflow-hidden border-b border-white/10 bg-black sm:min-h-[600px] lg:min-h-[680px]">
         <img
-          src="/images/ncaa-arena.jpg"
+          src={assetPath("/images/ncaa-arena.jpg")}
           alt="NCAA Division I Wrestling Championships arena"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
@@ -83,7 +83,7 @@ export default function CoachesPage() {
 
                   {/* Coach headshot */}
                   <Image
-                    src={coach.image}
+                    src={assetPath(coach.image)}
                     alt={`${coach.name} - United Training Facility coach`}
                     fill
                     sizes="(min-width: 768px) 50vw, 100vw"
@@ -92,7 +92,6 @@ export default function CoachesPage() {
 
                   {/* Blend bottom into card */}
                   <div className="absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-black/30 to-transparent" />
-
                 </div>
 
                 {/* Coach details */}
