@@ -239,6 +239,8 @@ export default function AboutPage() {
               Our Belief
             </p>
 
+
+
             <p className="mt-8 font-[var(--font-oswald)] text-3xl font-bold uppercase leading-tight text-white sm:text-4xl lg:text-5xl">
               Wrestling is an individual sport strengthened by community.
             </p>
