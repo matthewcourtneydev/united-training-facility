@@ -1,8 +1,8 @@
 import Link from "next/link";
-
 import Container from "@/components/ui/Container";
 import { weeklySchedule } from "@/data/schedule";
 import { getUpcomingCalendarEvents } from "@/lib/googleCalendar";
+import { assetPath } from "@/lib/assetPath";
 
 const TIME_ZONE = "America/New_York";
 
@@ -52,7 +52,7 @@ export default async function SchedulePage() {
 <section className="relative min-h-[500px] overflow-hidden border-b border-white/10 bg-black sm:min-h-[560px] lg:min-h-[620px]">
   {/* Hero image */}
   <img
-    src="/images/andy-rendos-double.png"
+    src={assetPath("/images/andy-rendos-double.png")}
     alt=""
     aria-hidden="true"
     className="absolute inset-0 h-full w-full object-cover object-center"

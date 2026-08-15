@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import { assetPath } from "@/lib/assetPath";
 import Container from "@/components/ui/Container";
 
 export default function AboutPage() {
@@ -10,7 +10,7 @@ export default function AboutPage() {
       <section className="relative isolate min-h-[520px] overflow-hidden border-b border-white/10 bg-black sm:min-h-[620px] lg:min-h-[680px]">
         {/* Mobile hero image */}
         <Image
-          src="/images/aj-single.jpg"
+          src={assetPath("/images/aj-single.jpg")}
           alt="Wrestlers competing"
           fill
           priority
@@ -20,7 +20,7 @@ export default function AboutPage() {
 
         {/* Desktop / tablet hero image */}
         <Image
-          src="/images/aj-wrestling.png"
+          src={assetPath("/images/aj-wrestling.png")}
           alt="AJ Burkhart competing in collegiate wrestling"
           fill
           priority

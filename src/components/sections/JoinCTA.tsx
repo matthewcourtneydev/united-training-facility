@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import { assetPath } from "@/lib/assetPath";
 import Container from "@/components/ui/Container";
 
 export default function JoinCta() {
@@ -9,7 +9,7 @@ export default function JoinCta() {
       {/* Subtle background watermark */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <Image
-          src="/images/logo-no-text.png"
+          src={assetPath("/images/logo-no-text.png")}
           alt=""
           width={700}
           height={700}

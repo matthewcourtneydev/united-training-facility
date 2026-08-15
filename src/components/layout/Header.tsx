@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import { assetPath } from "@/lib/assetPath"; 
 import DesktopNav from "@/components/layout/DesktopNav";
 import Logo from "@/components/layout/Logo";
 import MobileNav from "@/components/layout/MobileNav";

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import { assetPath } from "@/lib/assetPath";
 export default function Logo() {
   return (
     <Link
@@ -9,7 +9,7 @@ export default function Logo() {
       className="flex items-center"
     >
       <Image
-        src="/images/logo-united-only.png"
+        src={assetPath("/images/logo-united-only.png")}
         alt="United Training Facility"
         width={220}
         height={80}

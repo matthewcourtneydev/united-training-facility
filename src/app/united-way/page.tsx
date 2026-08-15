@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import { assetPath } from "@/lib/assetPath";
 import Container from "@/components/ui/Container";
 import { fundamentals } from "@/data/fundamentals";
 
@@ -19,7 +19,7 @@ export default function UnitedWayPage() {
         {/* Eagle watermark */}
         <div className="pointer-events-none absolute right-[5%] top-1/2 hidden h-[360px] w-[460px] -translate-y-1/2 opacity-[0.09] lg:block">
           <Image
-            src="/images/badge.png"
+            src={assetPath("/images/badge.png")}
             alt=""
             fill
             sizes="460px"
@@ -84,7 +84,7 @@ export default function UnitedWayPage() {
       {/* Wrestling photo */}
       <section className="relative h-[360px] overflow-hidden sm:h-[460px] lg:h-[540px]">
         <Image
-          src="/images/united-hero-image.jpg"
+          src={assetPath("/images/united-hero-image.jpg")}
           alt="Wrestlers competing during a match"
           fill
           sizes="100vw"
@@ -161,7 +161,7 @@ export default function UnitedWayPage() {
 
         <div className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[420px] w-[520px] -translate-x-1/2 -translate-y-1/2 opacity-[0.035] lg:block">
           <Image
-            src="/images/logo-no-text.png"
+            src={assetPath("/images/logo-no-text.png")}
             alt=""
             fill
             sizes="520px"

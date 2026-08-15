@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import { assetPath } from "@/lib/assetPath";
 import Container from "@/components/ui/Container";
 
 export default function Hero() {
@@ -9,7 +9,7 @@ export default function Hero() {
       {/* Background photo */}
       <div className="absolute inset-0">
         <Image
-          src="/images/united-home-hero.png"
+          src={assetPath("/images/united-home-hero.png")}
           alt=""
           fill
           priority

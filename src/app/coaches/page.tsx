@@ -1,6 +1,7 @@
 import Container from "@/components/ui/Container";
 import { coaches } from "@/data/coaches";
 import Image from "next/image";
+import { assetPath } from "@/lib/assetPath";
 
 const featuredCoaches = coaches.filter((coach) => coach.credentials.length > 0);
 

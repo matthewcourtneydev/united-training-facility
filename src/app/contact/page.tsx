@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-    FaFacebookF,
-    FaInstagram,
-    FaTiktok,
-    FaXTwitter,
-  } from "react-icons/fa6";
-
+  FaFacebookF,
+  FaInstagram,
+  FaTiktok,
+  FaXTwitter,
+} from "react-icons/fa6";
+import { assetPath } from "@/lib/assetPath";
 import Container from "@/components/ui/Container";
 
 export default function ContactPage() {
@@ -130,51 +130,51 @@ export default function ContactPage() {
                     </p>
                   </div>
                 </div>
-{/* Social */}
-<div className="grid gap-5 border-b border-black/10 py-7 sm:grid-cols-[180px_1fr]">
-  <p className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-400">
-    Social Media
-  </p>
+                {/* Social */}
+                <div className="grid gap-5 border-b border-black/10 py-7 sm:grid-cols-[180px_1fr]">
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-400">
+                    Social Media
+                  </p>
 
-  <div>
-    <p className="text-lg font-semibold text-black">
-      Follow United
-    </p>
+                  <div>
+                    <p className="text-lg font-semibold text-black">
+                      Follow United
+                    </p>
 
-    <p className="mt-2 text-sm leading-6 text-neutral-500">
-      Follow along for training updates, events, results, and everything
-      happening in the room.
-    </p>
+                    <p className="mt-2 text-sm leading-6 text-neutral-500">
+                      Follow along for training updates, events, results, and
+                      everything happening in the room.
+                    </p>
 
-    <div className="mt-5 flex flex-wrap gap-3">
-      <Link
-        href="https://www.instagram.com/unitedtrainingfacility?igsh=MXdlb2R1Z2pqYTJmcg==&igsi=MXdlb2R1Z2pqYTJmcg=="
-        target="_blank"
-        aria-label="Instagram"
-        className="flex h-11 w-11 items-center justify-center border border-black/15 text-black transition hover:border-[var(--primary-bright)] hover:bg-[var(--primary-bright)] hover:text-white"
-      >
-        <FaInstagram className="h-5 w-5" />
-      </Link>
+                    <div className="mt-5 flex flex-wrap gap-3">
+                      <Link
+                        href="https://www.instagram.com/unitedtrainingfacility?igsh=MXdlb2R1Z2pqYTJmcg==&igsi=MXdlb2R1Z2pqYTJmcg=="
+                        target="_blank"
+                        aria-label="Instagram"
+                        className="flex h-11 w-11 items-center justify-center border border-black/15 text-black transition hover:border-[var(--primary-bright)] hover:bg-[var(--primary-bright)] hover:text-white"
+                      >
+                        <FaInstagram className="h-5 w-5" />
+                      </Link>
 
-      <Link
-        href="https://www.facebook.com/p/United-Training-Facility-100092605913030/"
-        target="_blank"
-        aria-label="Facebook"
-        className="flex h-11 w-11 items-center justify-center border border-black/15 text-black transition hover:border-[var(--primary-bright)] hover:bg-[var(--primary-bright)] hover:text-white"
-      >
-        <FaFacebookF className="h-5 w-5" />
-      </Link>
+                      <Link
+                        href="https://www.facebook.com/p/United-Training-Facility-100092605913030/"
+                        target="_blank"
+                        aria-label="Facebook"
+                        className="flex h-11 w-11 items-center justify-center border border-black/15 text-black transition hover:border-[var(--primary-bright)] hover:bg-[var(--primary-bright)] hover:text-white"
+                      >
+                        <FaFacebookF className="h-5 w-5" />
+                      </Link>
 
-      <Link
-        href="https://www.tiktok.com/@united.training.facility?_r=1&_t=ZP-98ueayII3CR"
-        target="_blank"
-        aria-label="TikTok"
-        className="flex h-11 w-11 items-center justify-center border border-black/15 text-black transition hover:border-[var(--primary-bright)] hover:bg-[var(--primary-bright)] hover:text-white"
-      >
-        <FaTiktok className="h-5 w-5" />
-      </Link>
+                      <Link
+                        href="https://www.tiktok.com/@united.training.facility?_r=1&_t=ZP-98ueayII3CR"
+                        target="_blank"
+                        aria-label="TikTok"
+                        className="flex h-11 w-11 items-center justify-center border border-black/15 text-black transition hover:border-[var(--primary-bright)] hover:bg-[var(--primary-bright)] hover:text-white"
+                      >
+                        <FaTiktok className="h-5 w-5" />
+                      </Link>
 
-      {/* <Link
+                      {/* <Link
         href="#"
         target="_blank"
         aria-label="X"
@@ -182,9 +182,9 @@ export default function ContactPage() {
       >
         <FaXTwitter className="h-5 w-5" />
       </Link> */}
-    </div>
-  </div>
-</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

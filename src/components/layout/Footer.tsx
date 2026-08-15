@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { assetPath } from "@/lib/assetPath";
 import { navigation } from "@/data/navigation";
 import Container from "@/components/ui/Container";
 import {
@@ -26,7 +27,7 @@ export default function Footer() {
               className="inline-block"
             >
               <Image
-                src="/images/white-text.png"
+                src={assetPath("/images/white-text.png")}
                 alt="United Training Facility"
                 width={320}
                 height={120}

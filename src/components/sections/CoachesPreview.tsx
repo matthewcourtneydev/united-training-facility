@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { assetPath } from "@/lib/assetPath";
 import Container from "@/components/ui/Container";
 import { coaches } from "@/data/coaches";
 
@@ -42,7 +43,7 @@ export default function CoachesPreview() {
               >
                 {/* Coach image */}
                 <Image
-                  src={coach.image}
+                  src={assetPath(coach.image)}
                   alt={`${coach.name} - United Training Facility coach`}
                   fill
                   sizes="(min-width: 1024px) 18vw, (min-width: 640px) 40vw, 80vw"
