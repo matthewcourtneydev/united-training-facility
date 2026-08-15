@@ -1,65 +1,70 @@
+import Image from "next/image";
 import Link from "next/link";
-import { coaches } from "@/data/coaches";
 import Container from "@/components/ui/Container";
+import { coaches } from "@/data/coaches";
 
-const featuredCoaches = coaches.filter((coach) => coach.credentials.length > 0);
+const featuredCoaches = coaches.filter((coach) => coach.featured);
 
 export default function CoachesPreview() {
   return (
-    <section className="border-b border-white/10 bg-black py-24 sm:py-32">
+    <section className="bg-neutral-100 py-14 text-black sm:py-16 lg:py-18">
       <Container>
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-3xl">
+        <div className="grid gap-10 lg:grid-cols-[0.5fr_1.5fr] lg:items-center lg:gap-10">
+          <div className="max-w-xs">
             <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
               Our Coaches
             </p>
 
-            <h2 className="mt-4 font-[var(--font-oswald)] text-4xl font-bold uppercase leading-tight sm:text-5xl lg:text-6xl">
+            <h2 className="mt-4 font-[var(--font-oswald)] text-3xl font-bold uppercase leading-[1.02] sm:text-4xl lg:text-[2.65rem]">
               Proven Experience.
               <br />
-              Shared With The Room.
+              Shared With the Room.
             </h2>
 
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-400">
+            <p className="mt-5 text-sm leading-6 text-neutral-600 sm:text-base">
               United brings together coaches with championship-level experience
               who are committed to helping athletes grow on and off the mat.
             </p>
+
+            <Link
+              href="/coaches"
+              className="mt-7 inline-flex border-b border-[var(--primary-bright)] pb-1 text-sm font-bold uppercase tracking-[0.16em] text-[var(--primary-bright)] transition hover:text-[var(--primary)]"
+            >
+              Meet All Coaches →
+            </Link>
           </div>
 
-          <Link
-            href="/coaches"
-            className="inline-flex w-fit border-b border-white pb-1 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:border-[var(--primary-bright)] hover:text-[var(--primary-bright)]"
-          >
-            Meet All Coaches →
-          </Link>
-        </div>
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-5">
+            {featuredCoaches.map((coach) => (
+              <article
+                key={coach.slug}
+                className="group relative aspect-[3/5] overflow-hidden border border-black/5 bg-neutral-950 shadow-[0_10px_24px_rgba(0,0,0,0.10)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_34px_rgba(0,0,0,0.16)]"
+              >
+                {/* Coach image */}
+                <Image
+                  src={coach.image}
+                  alt={`${coach.name} - United Training Facility coach`}
+                  fill
+                  sizes="(min-width: 1024px) 18vw, (min-width: 640px) 40vw, 80vw"
+                  className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.025]"
+                />
 
-        <div className="mt-16 grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-2">
-          {featuredCoaches.map((coach) => (
-            <article
-              key={coach.name}
-              className="bg-black p-8 transition hover:bg-neutral-950 sm:p-10"
-            >
-              <p className="text-xs font-bold uppercase tracking-[0.24em] text-neutral-600">
-                United Coach
-              </p>
+                {/* Dark gradient behind text */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
 
-              <h3 className="mt-4 font-[var(--font-oswald)] text-3xl font-bold uppercase">
-                {coach.name}
-              </h3>
+                {/* Coach details */}
+                <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--primary-bright)] sm:text-xs">
+                    {coach.role}
+                  </p>
 
-              <ul className="mt-7 space-y-3">
-                {coach.credentials.map((credential) => (
-                  <li
-                    key={credential}
-                    className="border-l border-[var(--primary-bright)] pl-4 text-sm leading-6 text-neutral-400"
-                  >
-                    {credential}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
+                  <h3 className="mt-2 font-[var(--font-oswald)] text-xl font-bold uppercase leading-tight text-white sm:text-2xl">
+                    {coach.name}
+                  </h3>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </Container>
     </section>

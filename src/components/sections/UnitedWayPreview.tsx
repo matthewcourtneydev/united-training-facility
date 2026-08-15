@@ -1,55 +1,60 @@
 import Link from "next/link";
-import { fundamentals } from "@/data/fundamentals";
-import Container from "@/components/ui/Container";
 
-const featuredFundamentals = fundamentals.filter((fundamental) =>
-  ["01", "05", "09", "11"].includes(fundamental.number),
-);
+import Container from "@/components/ui/Container";
+import { fundamentals } from "@/data/fundamentals";
+
+const featuredFundamentals = fundamentals.slice(0, 4);
 
 export default function UnitedWayPreview() {
   return (
-    <section className="border-b border-white/10 bg-black py-24 sm:py-32">
+    <section className="bg-neutral-100 py-24 text-black sm:py-28">
       <Container>
         <div className="max-w-3xl">
           <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
             The United Way
           </p>
 
-          <h2 className="mt-4 font-[var(--font-oswald)] text-4xl font-bold uppercase leading-tight sm:text-5xl lg:text-6xl">
+          <h2 className="mt-4 font-[var(--font-oswald)] text-4xl font-bold uppercase leading-tight sm:text-5xl">
             More Than Wrestling.
           </h2>
 
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-400">
+          <p className="mt-5 max-w-2xl text-base leading-7 text-neutral-600 sm:text-lg">
             The United Way defines how we train, how we treat one another, and
             the kind of people we strive to become.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-2">
-        {featuredFundamentals.map((fundamental) => (
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {featuredFundamentals.map((fundamental) => (
             <article
               key={fundamental.number}
-              className="bg-black p-8 transition hover:bg-neutral-950 sm:p-10"
+              className="group flex min-h-[300px] flex-col border border-black/5 bg-white p-7 shadow-[0_12px_30px_rgba(0,0,0,0.10)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(0,0,0,0.15)]"
             >
-              <p className="font-[var(--font-oswald)] text-5xl font-bold text-white/15">
+              <p className="font-[var(--font-oswald)] text-4xl font-bold text-[var(--primary-bright)]">
                 {fundamental.number}
               </p>
 
-              <h3 className="mt-6 font-[var(--font-oswald)] text-2xl font-bold uppercase">
+              <div className="mt-3 h-[2px] w-10 bg-[var(--primary-bright)]" />
+
+              <h3 className="mt-6 font-[var(--font-oswald)] text-2xl font-bold uppercase leading-tight text-black">
                 {fundamental.title}
               </h3>
 
-              <p className="mt-3 text-base leading-7 text-neutral-400">
+              <p className="mt-4 text-sm leading-7 text-neutral-600">
                 {fundamental.description}
               </p>
+
+              <span className="mt-auto pt-8 text-xl text-[var(--primary-bright)] transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
             </article>
           ))}
         </div>
 
-        <div className="mt-10">
+        <div className="mt-10 text-center">
           <Link
             href="/united-way"
-            className="inline-flex border-b border-white pb-1 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:border-[var(--primary-bright)] hover:text-[var(--primary-bright)]"
+            className="inline-flex border-b border-[var(--primary-bright)] pb-1 text-sm font-bold uppercase tracking-[0.16em] text-[var(--primary-bright)] transition hover:text-[var(--primary)]"
           >
             Explore All 12 Fundamentals →
           </Link>

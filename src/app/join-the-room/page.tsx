@@ -6,8 +6,15 @@ import { memberships } from "@/data/memberships";
 export default function JoinTheRoomPage() {
   return (
     <>
-      <section className="border-b border-white/10 bg-black py-20 sm:py-28">
-        <Container>
+      {/* Hero */}
+      <section className="relative overflow-hidden border-b border-white/10 bg-black py-20 sm:py-28 lg:py-32">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_40%,rgba(20,95,194,0.16),transparent_35%)]" />
+
+        <div className="pointer-events-none absolute -right-8 top-1/2 hidden -translate-y-1/2 font-[var(--font-oswald)] text-[14rem] font-bold uppercase leading-none text-white/[0.025] lg:block">
+          United
+        </div>
+
+        <Container className="relative">
           <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
             Join the Room
           </p>
@@ -19,114 +26,175 @@ export default function JoinTheRoomPage() {
           </h1>
 
           <p className="mt-8 max-w-3xl text-lg leading-8 text-neutral-400 sm:text-xl">
-            Whether you&apos;re just beginning your wrestling journey or
-            looking to take your wrestling to the next level, there&apos;s a
-            place for you at United.
+            Whether you&apos;re just beginning your wrestling journey or looking
+            to take your wrestling to the next level, there&apos;s a place for
+            you at United.
           </p>
         </Container>
       </section>
 
-      <section className="border-b border-white/10 bg-neutral-950 py-24 sm:py-32">
+      {/* Memberships */}
+      <section className="bg-neutral-100 py-20 text-black sm:py-24">
         <Container>
-          <div className="mb-14 max-w-3xl">
+          <div className="mb-12 max-w-3xl">
             <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
               Membership
             </p>
 
-            <h2 className="mt-4 font-[var(--font-oswald)] text-4xl font-bold uppercase sm:text-5xl">
+            <h2 className="mt-4 font-[var(--font-oswald)] text-4xl font-bold uppercase leading-[0.98] sm:text-5xl lg:text-6xl">
               Choose Your Membership
             </h2>
+
+            <p className="mt-5 max-w-2xl text-base leading-7 text-neutral-600 sm:text-lg">
+              Choose the membership that fits your athlete. Registration and
+              payment are completed securely through PushPress.
+            </p>
           </div>
 
-          <div className="grid gap-px overflow-hidden border border-white/10 bg-white/10 lg:grid-cols-2">
-            {memberships.map((membership) => (
-              <article
-                key={membership.name}
-                className="flex flex-col bg-black p-8 sm:p-10"
-              >
-                <h3 className="font-[var(--font-oswald)] text-3xl font-bold uppercase">
-                  {membership.name}
-                </h3>
+          <div className="grid border-l border-t border-black/10 md:grid-cols-2">
+            {memberships.map((membership) => {
+              const hasRegistrationUrl =
+                membership.registrationUrl.trim() !== "";
 
-                <div className="mt-7 flex items-end gap-2">
-                  <span className="font-[var(--font-oswald)] text-6xl font-bold">
-                    ${membership.price}
-                  </span>
-
-                  <span className="pb-2 text-sm uppercase tracking-[0.14em] text-neutral-500">
-                    / {membership.period}
-                  </span>
-                </div>
-
-                <div className="my-8 h-px bg-white/10" />
-
-                <ul className="flex-1 space-y-4">
-                  {membership.features.map((feature) => (
-                    <li
-                      key={feature}
-                      className="flex gap-3 text-sm leading-6 text-neutral-300"
-                    >
-                      <span className="text-[var(--primary-bright)]">—</span>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <button
-                  type="button"
-                  disabled
-                  className="mt-10 w-full cursor-not-allowed border border-white/20 px-6 py-3.5 text-sm font-bold uppercase tracking-[0.16em] text-neutral-500"
+              return (
+                <article
+                  key={membership.name}
+                  className="group flex flex-col border-b border-r border-black/10 bg-white p-7 transition-colors duration-300 hover:bg-neutral-50 sm:p-9"
                 >
-                  Registration Coming Soon
-                </button>
-              </article>
-            ))}
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--primary-bright)]">
+                      United Membership
+                    </p>
+
+                    <h3 className="mt-4 font-[var(--font-oswald)] text-3xl font-bold uppercase leading-tight sm:text-4xl">
+                      {membership.name}
+                    </h3>
+
+                    <div className="mt-6 flex items-end gap-2">
+                      <p className="font-[var(--font-oswald)] text-5xl font-bold leading-none text-[var(--primary-bright)] sm:text-6xl">
+                        {membership.price}
+                      </p>
+
+                      <p className="pb-1 text-xs font-bold uppercase tracking-[0.18em] text-neutral-400">
+                        {membership.billing}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="my-7 h-px bg-black/10" />
+
+                  <ul className="space-y-4">
+                    {membership.benefits.map((benefit) => (
+                      <li
+                        key={benefit}
+                        className="flex gap-3 text-sm leading-6 text-neutral-600"
+                      >
+                        <span className="mt-[11px] h-px w-4 shrink-0 bg-[var(--primary-bright)]" />
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-auto pt-8">
+                    {hasRegistrationUrl ? (
+                      <Link
+                        href={membership.registrationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex w-full items-center justify-center bg-[var(--primary-bright)] px-6 py-4 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--primary)]"
+                      >
+                        Join Now ↗
+                      </Link>
+                    ) : (
+                      <div className="flex w-full items-center justify-center border border-black/10 bg-neutral-50 px-6 py-4 text-sm font-bold uppercase tracking-[0.16em] text-neutral-400">
+                        Registration Coming Soon
+                      </div>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
           </div>
 
           <p className="mt-6 text-sm leading-6 text-neutral-500">
-            Registration buttons will connect directly to the appropriate
-            United membership in PushPress.
+            Registration opens in PushPress, where membership information,
+            waivers, and payment are completed securely.
           </p>
         </Container>
       </section>
-
-      <section className="border-b border-white/10 bg-black py-24 sm:py-32">
+      <section className="bg-[var(--primary)] py-14 text-white sm:py-16">
         <Container>
-          <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-[0.28em] text-white/60">
+                New to United?
+              </p>
+
+              <h2 className="mt-3 font-[var(--font-oswald)] text-4xl font-bold uppercase sm:text-5xl">
+                Your First Session Is Free.
+              </h2>
+
+              <p className="mt-4 max-w-xl text-lg text-white/75">
+                Come experience the room before choosing a membership.
+              </p>
+            </div>
+
+            <Link
+              href="/contact"
+              className="w-fit bg-white px-7 py-3.5 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:bg-neutral-200"
+            >
+              Claim Your Free Trial
+            </Link>
+          </div>
+        </Container>
+      </section>
+      {/* Financial assistance */}
+      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#0d0d0d_0%,#171717_55%,#0d0d0d_100%)] py-20 text-white sm:py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_50%,rgba(20,95,194,0.14),transparent_35%)]" />
+
+        <Container className="relative">
+          <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-center lg:gap-20">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
                 Financial Assistance
               </p>
 
-              <h2 className="mt-4 font-[var(--font-oswald)] text-4xl font-bold uppercase leading-tight sm:text-5xl">
-                Opportunity for Every Athlete.
+              <h2 className="mt-4 font-[var(--font-oswald)] text-4xl font-bold uppercase leading-[0.98] sm:text-5xl lg:text-6xl">
+                Opportunity for
+                <br />
+                Every Athlete.
               </h2>
             </div>
 
-            <div>
+            <div className="max-w-2xl">
               <p className="text-lg leading-8 text-neutral-300">
                 We believe every athlete who wants to grow should have an
                 opportunity to be part of the United room.
               </p>
 
-              <p className="mt-6 text-lg leading-8 text-neutral-400">
+              <p className="mt-5 text-lg leading-8 text-neutral-400">
                 Need a scholarship or financial assistance? Please reach out to
                 Grace Courtney to discuss available options.
               </p>
 
-              <Link
-                href="/contact"
-                className="mt-8 inline-flex border-b border-white pb-1 text-sm font-bold uppercase tracking-[0.16em] transition hover:border-[var(--primary-bright)] hover:text-[var(--primary-bright)]"
+              <a
+                href="mailto:gracekcourtney27@gmail.com"
+                className="mt-8 inline-flex border-b border-white/50 pb-1 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:border-white"
               >
-                Contact United →
-              </Link>
+                Email Grace →
+              </a>
             </div>
           </div>
         </Container>
       </section>
 
-      <section className="relative overflow-hidden bg-[var(--primary)] py-28 sm:py-36">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.12),transparent_45%)]" />
+      {/* Closing CTA */}
+      <section className="relative overflow-hidden bg-[var(--primary)] py-20 text-white sm:py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.10),transparent_45%)]" />
+
+        <div className="pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 font-[var(--font-oswald)] text-[14rem] font-bold uppercase leading-none text-white/[0.025] lg:block">
+          United
+        </div>
 
         <Container className="relative">
           <div className="mx-auto max-w-5xl text-center">
@@ -134,7 +202,7 @@ export default function JoinTheRoomPage() {
               United Training Facility
             </p>
 
-            <h2 className="mt-6 font-[var(--font-oswald)] text-5xl font-bold uppercase leading-[0.95] sm:text-6xl lg:text-7xl">
+            <h2 className="mt-6 font-[var(--font-oswald)] text-4xl font-bold uppercase leading-[0.95] sm:text-5xl lg:text-7xl">
               Different Schools.
               <br />
               Different Backgrounds.
@@ -142,7 +210,7 @@ export default function JoinTheRoomPage() {
               One Room.
             </h2>
 
-            <p className="mt-8 font-[var(--font-oswald)] text-2xl font-bold uppercase tracking-wide sm:text-3xl">
+            <p className="mt-8 font-[var(--font-oswald)] text-2xl font-bold uppercase sm:text-3xl">
               One Room. One Purpose. United.
             </p>
           </div>

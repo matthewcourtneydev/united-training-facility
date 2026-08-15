@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import Container from "@/components/ui/Container";
@@ -5,15 +6,38 @@ import Container from "@/components/ui/Container";
 export default function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-white/10">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(20,95,194,0.18),transparent_35%)]" />
+      {/* Background photo */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/united-home-hero.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[70%_center]"
+        />
 
-      <Container className="relative flex min-h-[72vh] items-center py-24 sm:py-28 lg:min-h-[78vh]">
+        {/* Darkens the entire photo */}
+        <div className="absolute inset-0 bg-black/25" />
+
+        {/* Fades photo into black behind the copy */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-black/10" />
+
+        {/* Fades bottom into the next section */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
+
+        {/* United blue atmospheric glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_45%,rgba(20,95,194,0.16),transparent_40%)]" />
+      </div>
+
+      {/* Hero content */}
+      <Container className="relative z-10 flex min-h-[72vh] items-center py-24 sm:py-28 lg:min-h-[78vh]">
         <div className="max-w-4xl">
           <p className="mb-5 text-sm font-bold uppercase tracking-[0.28em] text-neutral-400">
             United Training Facility
           </p>
 
-          <h1 className="font-[var(--font-oswald)] text-6xl font-bold uppercase leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
+          <h1 className="font-[var(--font-oswald)] text-5xl font-bold uppercase leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
             One Room.
             <br />
             One Purpose.

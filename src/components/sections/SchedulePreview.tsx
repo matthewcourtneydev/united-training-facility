@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { weeklySchedule } from "@/data/schedule";
+
 import Container from "@/components/ui/Container";
+import { weeklySchedule } from "@/data/schedule";
 
 const upcomingEvents = [
   {
@@ -22,40 +23,44 @@ const upcomingEvents = [
 
 export default function SchedulePreview() {
   return (
-    <section className="border-b border-white/10 bg-neutral-950 py-24 sm:py-32">
+    <section className="border-y border-white/10 bg-[linear-gradient(135deg,#111_0%,#181818_50%,#101010_100%)] py-20 sm:py-24">
       <Container>
-        <div className="grid gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
-              Train With Us
-            </p>
+        <div className="grid gap-14 lg:grid-cols-2 lg:gap-0">
+          <div className="lg:pr-14">
+            <div className="flex items-center gap-3">
+              <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
+                Train With Us
+              </p>
 
-            <h2 className="mt-4 font-[var(--font-oswald)] text-4xl font-bold uppercase leading-tight sm:text-5xl lg:text-6xl">
+              <span className="hidden h-px w-10 bg-white/30 sm:block" />
+            </div>
+
+            <h2 className="mt-4 font-[var(--font-oswald)] text-4xl font-bold uppercase leading-tight sm:text-5xl">
               Weekly Schedule
             </h2>
 
-            <p className="mt-6 max-w-xl text-lg leading-8 text-neutral-400">
+            <p className="mt-5 max-w-xl text-sm leading-7 text-neutral-500 sm:text-base">
               All practices are held at United Training Facility, 310 S Main St,
               Athens, Pennsylvania.
             </p>
 
-            <div className="mt-10 border-y border-white/10">
+            <div className="mt-8 border-t border-white/10">
               {weeklySchedule.map((practice) => (
                 <div
                   key={practice.day}
-                  className="grid grid-cols-[1fr_auto] gap-6 border-b border-white/10 py-6 last:border-b-0"
+                  className="grid gap-3 border-b border-white/10 py-5 sm:grid-cols-[1fr_auto] sm:items-center"
                 >
                   <div>
-                    <p className="font-[var(--font-oswald)] text-2xl font-bold uppercase">
+                    <p className="font-[var(--font-oswald)] text-2xl font-bold uppercase text-white">
                       {practice.day}
                     </p>
 
-                    <p className="mt-2 text-sm leading-6 text-neutral-500">
+                    <p className="mt-1 text-xs leading-5 text-neutral-500">
                       {practice.groups.join(" • ")}
                     </p>
                   </div>
 
-                  <p className="self-center text-sm font-semibold uppercase tracking-[0.12em] text-neutral-300 sm:text-base">
+                  <p className="text-sm font-bold uppercase tracking-[0.08em] text-white">
                     {practice.time}
                   </p>
                 </div>
@@ -64,52 +69,64 @@ export default function SchedulePreview() {
 
             <Link
               href="/schedule"
-              className="mt-10 inline-flex border-b border-white pb-1 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:border-[var(--primary-bright)] hover:text-[var(--primary-bright)]"
+              className="mt-8 inline-flex border-b border-[var(--primary-bright)] pb-1 text-sm font-bold uppercase tracking-[0.16em] text-[var(--primary-bright)] transition hover:text-white"
             >
               View Full Schedule →
             </Link>
           </div>
 
-          <div>
-            <div className="flex items-end justify-between gap-6">
-              <div>
-                <p className="text-sm font-bold uppercase tracking-[0.28em] text-neutral-500">
-                  Calendar
-                </p>
+          <div className="border-white/10 lg:border-l lg:pl-14">
+            <div className="flex items-center gap-3">
+              <p className="text-sm font-bold uppercase tracking-[0.28em] text-neutral-400">
+                Calendar
+              </p>
 
-                <h3 className="mt-3 font-[var(--font-oswald)] text-3xl font-bold uppercase sm:text-4xl">
-                  Upcoming at United
-                </h3>
-              </div>
+              <span className="hidden h-px w-10 bg-white/30 sm:block" />
             </div>
+
+            <h3 className="mt-4 font-[var(--font-oswald)] text-4xl font-bold uppercase leading-tight sm:text-5xl">
+              Upcoming at United
+            </h3>
 
             <div className="mt-8 border-t border-white/10">
-              {upcomingEvents.map((event) => (
-                <article
-                  key={`${event.date}-${event.title}`}
-                  className="grid gap-4 border-b border-white/10 py-7 sm:grid-cols-[110px_1fr]"
-                >
-                  <p className="font-[var(--font-oswald)] text-xl font-bold uppercase text-[var(--primary-bright)]">
-                    {event.date}
-                  </p>
+              {upcomingEvents.map((event) => {
+                const [month, day] = event.date.split(" ");
 
-                  <div>
-                    <h4 className="font-[var(--font-oswald)] text-2xl font-bold uppercase">
-                      {event.title}
-                    </h4>
+                return (
+                  <article
+                    key={`${event.date}-${event.title}`}
+                    className="grid grid-cols-[70px_1fr] gap-5 border-b border-white/10 py-5"
+                  >
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--primary-bright)]">
+                        {month}
+                      </p>
 
-                    <p className="mt-2 text-sm uppercase tracking-[0.12em] text-neutral-500">
-                      {event.time}
-                    </p>
-                  </div>
-                </article>
-              ))}
+                      <p className="font-[var(--font-oswald)] text-3xl font-bold leading-none text-[var(--primary-bright)]">
+                        {day}
+                      </p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-[var(--font-oswald)] text-xl font-bold uppercase text-white">
+                        {event.title}
+                      </h4>
+
+                      <p className="mt-1 text-sm text-neutral-500">
+                        {event.time}
+                      </p>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
 
-            <p className="mt-6 text-sm leading-6 text-neutral-500">
-              Upcoming events will be pulled automatically from the United
-              Training Facility Google Calendar.
-            </p>
+            <Link
+              href="/schedule"
+              className="mt-8 inline-flex border-b border-[var(--primary-bright)] pb-1 text-sm font-bold uppercase tracking-[0.16em] text-[var(--primary-bright)] transition hover:text-white"
+            >
+              View Calendar →
+            </Link>
           </div>
         </div>
       </Container>

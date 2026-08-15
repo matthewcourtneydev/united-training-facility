@@ -2,6 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { navigation } from "@/data/navigation";
 import Container from "@/components/ui/Container";
+import {
+    FaFacebookF,
+    FaInstagram,
+    FaTiktok,
+    FaXTwitter,
+  } from "react-icons/fa6";
 
 const footerNav = [
   ...navigation,
@@ -28,9 +34,47 @@ export default function Footer() {
               />
             </Link>
 
-            <p className="mt-6 font-[var(--font-oswald)] text-xl font-bold uppercase tracking-wide">
-              One Room. One Purpose. United.
-            </p>
+            <p className="mt-6 font-bold uppercase text-white">
+  One Room. One Purpose. United.
+</p>
+
+<div className="mt-5 flex items-center gap-3">
+  <Link
+    href="https://www.instagram.com/unitedtrainingfacility?igsh=MXdlb2R1Z2pqYTJmcg==&igsi=MXdlb2R1Z2pqYTJmcg=="
+    target="_blank"
+    aria-label="Instagram"
+    className="flex h-10 w-10 items-center justify-center border border-white/15 text-neutral-400 transition hover:border-[var(--primary-bright)] hover:bg-[var(--primary-bright)] hover:text-white"
+  >
+    <FaInstagram className="h-4 w-4" />
+  </Link>
+
+  <Link
+    href="https://www.facebook.com/p/United-Training-Facility-100092605913030/"
+    target="_blank"
+    aria-label="Facebook"
+    className="flex h-10 w-10 items-center justify-center border border-white/15 text-neutral-400 transition hover:border-[var(--primary-bright)] hover:bg-[var(--primary-bright)] hover:text-white"
+  >
+    <FaFacebookF className="h-4 w-4" />
+  </Link>
+
+  <Link
+    href="https://www.tiktok.com/@united.training.facility?_r=1&_t=ZP-98ueayII3CR"
+    target="_blank"
+    aria-label="TikTok"
+    className="flex h-10 w-10 items-center justify-center border border-white/15 text-neutral-400 transition hover:border-[var(--primary-bright)] hover:bg-[var(--primary-bright)] hover:text-white"
+  >
+    <FaTiktok className="h-4 w-4" />
+  </Link>
+
+  {/* <Link
+    href="#"
+    target="_blank"
+    aria-label="X"
+    className="flex h-10 w-10 items-center justify-center border border-white/15 text-neutral-400 transition hover:border-[var(--primary-bright)] hover:bg-[var(--primary-bright)] hover:text-white"
+  >
+    <FaXTwitter className="h-4 w-4" />
+  </Link> */}
+</div>
 
             <p className="mt-4 max-w-md text-sm leading-7 text-neutral-500">
               United Training Facility brings wrestlers together from across the
