@@ -56,10 +56,10 @@ export async function getUpcomingCalendarEvents(
 
   try {
     const response = await fetch(calendarUrl, {
-      next: {
-        revalidate: 300,
-      },
-    });
+        next: {
+          revalidate: 60,
+        },
+      });
 
     if (!response.ok) {
       throw new Error(
