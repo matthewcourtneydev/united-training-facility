@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import Reveal from "@/components/motion/Reveal";
 import Container from "@/components/ui/Container";
 import { memberships } from "@/data/memberships";
 
@@ -14,22 +15,28 @@ export default function JoinTheRoomPage() {
           United
         </div>
 
-        <Container className="relative">
-          <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
-            Join the Room
-          </p>
+        <Container className="relative z-10">
+          <Reveal delay={0.08}>
+            <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
+              Join the Room
+            </p>
+          </Reveal>
 
-          <h1 className="mt-4 max-w-5xl font-[var(--font-oswald)] text-5xl font-bold uppercase leading-[0.95] sm:text-6xl lg:text-8xl">
-            There&apos;s a Place
-            <br />
-            for You Here.
-          </h1>
+          <Reveal delay={0.18}>
+            <h1 className="mt-4 max-w-5xl font-[var(--font-oswald)] text-5xl font-bold uppercase leading-[0.95] sm:text-6xl lg:text-8xl">
+              There&apos;s a Place
+              <br />
+              for You Here.
+            </h1>
+          </Reveal>
 
-          <p className="mt-8 max-w-3xl text-lg leading-8 text-neutral-400 sm:text-xl">
-            Whether you&apos;re just beginning your wrestling journey or looking
-            to take your wrestling to the next level, there&apos;s a place for
-            you at United.
-          </p>
+          <Reveal delay={0.3}>
+            <p className="mt-8 max-w-3xl text-lg leading-8 text-neutral-400 sm:text-xl">
+              Whether you&apos;re just beginning your wrestling journey or
+              looking to take your wrestling to the next level, there&apos;s a
+              place for you at United.
+            </p>
+          </Reveal>
         </Container>
       </section>
 
@@ -59,7 +66,7 @@ export default function JoinTheRoomPage() {
               return (
                 <article
                   key={membership.name}
-                  className="group flex flex-col border-b border-r border-black/10 bg-white p-7 transition-colors duration-300 hover:bg-neutral-50 sm:p-9"
+                  className="group flex flex-col border-b border-r border-black/10 bg-white p-7 transition duration-300 hover:-translate-y-0.5 hover:bg-neutral-50 hover:shadow-[0_14px_30px_rgba(0,0,0,0.08)] sm:p-9"
                 >
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--primary-bright)]">
@@ -101,7 +108,7 @@ export default function JoinTheRoomPage() {
                         href={membership.registrationUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex w-full items-center justify-center bg-[var(--primary-bright)] px-6 py-4 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--primary)]"
+                        className="inline-flex w-full items-center justify-center bg-[var(--primary-bright)] px-6 py-4 text-sm font-bold uppercase tracking-[0.16em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--primary)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.14)]"
                       >
                         Join Now ↗
                       </Link>
@@ -122,6 +129,8 @@ export default function JoinTheRoomPage() {
           </p>
         </Container>
       </section>
+
+      {/* Free trial */}
       <section className="bg-[var(--primary)] py-14 text-white sm:py-16">
         <Container>
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
@@ -141,13 +150,14 @@ export default function JoinTheRoomPage() {
 
             <Link
               href="/contact"
-              className="w-fit bg-white px-7 py-3.5 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:bg-neutral-200"
+              className="w-fit bg-white px-7 py-3.5 text-sm font-bold uppercase tracking-[0.16em] text-black transition duration-300 hover:-translate-y-0.5 hover:bg-neutral-200"
             >
               Claim Your Free Trial
             </Link>
           </div>
         </Container>
       </section>
+
       {/* Financial assistance */}
       <section className="relative overflow-hidden bg-[linear-gradient(135deg,#0d0d0d_0%,#171717_55%,#0d0d0d_100%)] py-20 text-white sm:py-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_50%,rgba(20,95,194,0.14),transparent_35%)]" />

@@ -1,32 +1,38 @@
 import Image from "next/image";
 import Link from "next/link";
-import { assetPath } from "@/lib/assetPath";
+
+import HeroImageMotion from "@/components/motion/HeroImageMotion";
+import Reveal from "@/components/motion/Reveal";
 import Container from "@/components/ui/Container";
+import { assetPath } from "@/lib/assetPath";
 
 export default function AboutPage() {
   return (
     <>
       {/* Hero */}
       <section className="relative isolate min-h-[520px] overflow-hidden border-b border-white/10 bg-black sm:min-h-[620px] lg:min-h-[680px]">
-        {/* Mobile hero image */}
-        <Image
-          src={assetPath("/images/aj-single.jpg")}
-          alt="Wrestlers competing"
-          fill
-          priority
-          sizes="(max-width: 767px) 100vw"
-          className="object-cover object-center md:hidden"
-        />
+        {/* Animated hero imagery */}
+        <HeroImageMotion>
+          {/* Mobile hero image */}
+          <Image
+            src={assetPath("/images/aj-single.jpg")}
+            alt="Wrestlers competing"
+            fill
+            priority
+            sizes="(max-width: 767px) 100vw"
+            className="object-cover object-center md:hidden"
+          />
 
-        {/* Desktop / tablet hero image */}
-        <Image
-          src={assetPath("/images/aj-wrestling.png")}
-          alt="AJ Burkhart competing in collegiate wrestling"
-          fill
-          priority
-          sizes="(min-width: 768px) 100vw"
-          className="hidden scale-[1.06] object-cover object-right md:block md:translate-x-[6%]"
-        />
+          {/* Desktop / tablet hero image */}
+          <Image
+            src={assetPath("/images/aj-wrestling.png")}
+            alt="AJ Burkhart competing in collegiate wrestling"
+            fill
+            priority
+            sizes="(min-width: 768px) 100vw"
+            className="hidden scale-[1.06] object-cover object-right md:block md:translate-x-[6%]"
+          />
+        </HeroImageMotion>
 
         {/* Mobile darkening */}
         <div className="absolute inset-0 bg-black/35 md:hidden" />
@@ -43,17 +49,22 @@ export default function AboutPage() {
         {/* Bottom fade */}
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-black/45 sm:h-28" />
 
+        {/* Hero copy */}
         <Container className="relative z-10 flex min-h-[520px] items-center py-16 sm:min-h-[620px] sm:py-24 lg:min-h-[680px]">
           <div className="max-w-4xl">
-            <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
-              About United
-            </p>
+            <Reveal delay={0.08}>
+              <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
+                About United
+              </p>
+            </Reveal>
 
-            <h1 className="mt-5 max-w-[320px] font-[var(--font-oswald)] text-5xl font-bold uppercase leading-[0.92] tracking-tight text-white sm:max-w-none sm:text-6xl md:text-7xl lg:text-[5.75rem]">
-              United by Wrestling.
-              <br />
-              Built for More.
-            </h1>
+            <Reveal delay={0.18}>
+              <h1 className="mt-5 max-w-[320px] font-[var(--font-oswald)] text-5xl font-bold uppercase leading-[0.92] tracking-tight text-white sm:max-w-none sm:text-6xl md:text-7xl lg:text-[5.75rem]">
+                United by Wrestling.
+                <br />
+                Built for More.
+              </h1>
+            </Reveal>
           </div>
         </Container>
       </section>
@@ -238,8 +249,6 @@ export default function AboutPage() {
             <p className="text-sm font-bold uppercase tracking-[0.28em] text-white/60">
               Our Belief
             </p>
-
-
 
             <p className="mt-8 font-[var(--font-oswald)] text-3xl font-bold uppercase leading-tight text-white sm:text-4xl lg:text-5xl">
               Wrestling is an individual sport strengthened by community.

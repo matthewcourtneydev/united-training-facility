@@ -43,7 +43,7 @@ export default function CoachesPreview() {
               >
                 {/* Coach image */}
                 <Image
-                  src={assetPath(coach.image)}
+                  src={assetPath(coach.homeImage)}
                   alt={`${coach.name} - United Training Facility coach`}
                   fill
                   sizes="(min-width: 1024px) 18vw, (min-width: 640px) 40vw, 80vw"

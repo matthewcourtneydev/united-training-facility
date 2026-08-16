@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import Reveal from "@/components/motion/Reveal";
 import Container from "@/components/ui/Container";
 import { fundamentals } from "@/data/fundamentals";
 import { assetPath } from "@/lib/assetPath";
@@ -14,40 +15,46 @@ export default function UnitedWayPage() {
 
         {/* Giant 12 */}
         <div className="pointer-events-none absolute right-[4%] top-1/2 z-[1] hidden -translate-y-1/2 font-[var(--font-oswald)] text-[14rem] font-bold leading-none text-white/[0.035] md:block lg:right-[8%] lg:text-[24rem] lg:text-white/[0.04]">
-          12
+          <div className="animate-[watermarkFade_1.1s_ease-out_both]">12</div>
         </div>
 
         {/* Eagle watermark */}
-        <div className="pointer-events-none absolute right-[1%] top-1/2 z-[2] hidden h-[260px] w-[340px] -translate-y-1/2 md:block lg:right-[4%] lg:h-[380px] lg:w-[500px]">
-          <Image
-            src={assetPath("/images/logo-no-text.png")}
-            alt=""
-            fill
-            sizes="(min-width: 1024px) 500px, 340px"
-            className="scale-[1.15] object-contain opacity-[0.11] brightness-110 lg:scale-[1.25] lg:opacity-[0.14]"
-          />
+        <div className="pointer-events-none absolute right-[1%] top-[56%] z-[2] hidden h-[260px] w-[340px] -translate-y-1/2 md:block lg:right-[4%] lg:top-[55%] lg:h-[380px] lg:w-[500px]">
+          <div className="relative h-full w-full animate-[watermarkFade_1.25s_ease-out_both]">
+            <Image
+              src={assetPath("/images/logo-no-text.png")}
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 500px, 340px"
+              className="scale-[1.15] object-contain opacity-[0.11] brightness-110 lg:scale-[1.25] lg:opacity-[0.14]"
+            />
+          </div>
         </div>
 
         <Container className="relative z-10">
-          <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
-            The United Way
-          </p>
+          <Reveal delay={0.08}>
+            <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
+              The United Way
+            </p>
+          </Reveal>
 
-          <h1 className="mt-4 max-w-5xl font-[var(--font-oswald)] text-5xl font-bold uppercase leading-[0.95] sm:text-6xl lg:text-8xl">
-            How We Train.
-            <br />
-            How We Compete.
-            <br />
-            <span className="text-[var(--primary-bright)]">
-              How We Live.
-            </span>
-          </h1>
+          <Reveal delay={0.18}>
+            <h1 className="mt-4 max-w-5xl font-[var(--font-oswald)] text-5xl font-bold uppercase leading-[0.95] sm:text-6xl lg:text-8xl">
+              How We Train.
+              <br />
+              How We Compete.
+              <br />
+              <span className="text-[var(--primary-bright)]">How We Live.</span>
+            </h1>
+          </Reveal>
 
-          <p className="mt-8 max-w-3xl text-lg leading-8 text-neutral-400 sm:text-xl">
-            The United Way is more than a list of values. These principles
-            define how we train, how we treat one another, and the kind of
-            people we strive to become.
-          </p>
+          <Reveal delay={0.3}>
+            <p className="mt-8 max-w-3xl text-lg leading-8 text-neutral-400 sm:text-xl">
+              The United Way is more than a list of values. These principles
+              define how we train, how we treat one another, and the kind of
+              people we strive to become.
+            </p>
+          </Reveal>
         </Container>
       </section>
 
@@ -90,7 +97,7 @@ export default function UnitedWayPage() {
           alt="Wrestlers competing during a match"
           fill
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-center transition-transform duration-[1400ms] ease-out hover:scale-[1.015]"
         />
 
         <div className="absolute inset-0 bg-black/20" />
@@ -134,7 +141,7 @@ export default function UnitedWayPage() {
             {fundamentals.map((fundamental) => (
               <article
                 key={fundamental.number}
-                className="group min-h-[260px] border-b border-r border-black/10 bg-white p-7 transition-colors duration-300 hover:bg-neutral-50 sm:p-8"
+                className="group min-h-[260px] border-b border-r border-black/10 bg-white p-7 transition duration-300 hover:-translate-y-0.5 hover:bg-neutral-50 hover:shadow-[0_12px_26px_rgba(0,0,0,0.07)] sm:p-8"
               >
                 <p className="font-[var(--font-oswald)] text-5xl font-bold leading-none text-neutral-300 transition-colors duration-300 group-hover:text-[var(--primary-bright)]">
                   {fundamental.number}

@@ -117,12 +117,13 @@ export async function getUpcomingCalendarEvents(
 export type SiteAlertType = "cancelled" | "delayed" | "notice";
 
 export type SiteAlert = {
-  id: string;
-  type: SiteAlertType;
-  message: string;
-  start: Date;
-  end: Date;
-};
+    id: string;
+    type: SiteAlertType;
+    message: string;
+    start: Date;
+    end: Date;
+    originalStart?: string;
+  };
 
 export async function getSiteAlert(): Promise<SiteAlert | null> {
     const events = await getUpcomingCalendarEvents(20);
@@ -173,17 +174,30 @@ export async function getSiteAlert(): Promise<SiteAlert | null> {
       type = "delayed";
     }
   
-    const message = rawTitle
-      .replace(/^CANCELLED\s*[—–:-]?\s*/i, "")
-      .replace(/^DELAYED\s*[—–:-]?\s*/i, "")
-      .replace(/^NOTICE\s*[—–:-]?\s*/i, "")
-      .trim();
-  
-    return {
-      id: alertEvent.id,
-      type,
-      message: message || rawTitle,
-      start: alertEvent.start,
-      end: alertEvent.end,
-    };
+    const delayedMatch = rawTitle.match(
+        /^DELAYED\s+(.+?)\s*[-—–:]\s*(.+)$/i,
+      );
+      
+      const originalStart =
+        type === "delayed" && delayedMatch
+          ? delayedMatch[1].trim()
+          : undefined;
+      
+      const message =
+        type === "delayed" && delayedMatch
+          ? delayedMatch[2].trim()
+          : rawTitle
+              .replace(/^CANCELLED\s*[—–:-]?\s*/i, "")
+              .replace(/^DELAYED\s*[—–:-]?\s*/i, "")
+              .replace(/^NOTICE\s*[—–:-]?\s*/i, "")
+              .trim();
+      
+      return {
+        id: alertEvent.id,
+        type,
+        message: message || rawTitle,
+        start: alertEvent.start,
+        end: alertEvent.end,
+        originalStart,
+      };
   }

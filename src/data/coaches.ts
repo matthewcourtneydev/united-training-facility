@@ -4,6 +4,7 @@ export const coaches = [
       name: "Brian Courtney",
       role: "Owner",
       image: "/images/brian-headshot-v2.jpg",
+      homeImage: "/images/brian-headshot-home.jpg",
       featured: true,
       credentials: [
         "4× PIAA Medalist for Athens",
@@ -18,6 +19,7 @@ export const coaches = [
       name: "Dave Patrick",
       role: "Founder, United Training Facility",
       image: "/images/headshot-placeholder.jpg",
+      homeImage: "/images/placeholder-headshot-home.jpg",
       featured: true,
       credentials: [
         "3× PIAA Medalist for Wyalusing",
@@ -33,6 +35,7 @@ export const coaches = [
       role: "United Coach",
       featured: true,
       image: "/images/andy-headshot-v2.jpg",
+      homeImage: "/images/andy-headshot-home.jpg",
       credentials: [
         "3× PIAA Medalist for Brockway",
         "2× PIAA Champion",
@@ -45,6 +48,7 @@ export const coaches = [
       name: "AJ Burkhart",
       role: "United Coach",
       image: "/images/aj-headshot-v2.jpg",
+      homeImage: "/images/aj-headshot-home.jpg",
       featured: true,
       credentials: [
         "2015 New York State Champion for Waverly",
@@ -60,6 +64,7 @@ export const coaches = [
       name: "John Giachi",
       role: "United Coach",
       image: "/images/headshot-placeholder.jpg",
+      homeImage: "/images/placeholder-headshot-home.jpg",
       featured: false,
       credentials: [],
     },
@@ -69,6 +74,7 @@ export const coaches = [
       role: "United Coach",
       featured: false,
       image: "/images/headshot-placeholder.jpg",
+      homeImage: "/images/placeholder-headshot-home.jpg",
       credentials: [],
     },
     {
@@ -76,6 +82,7 @@ export const coaches = [
       name: "Travis Bennett",
       role: "Youth Head Coach",
       image: "/images/headshot-placeholder.jpg",
+      homeImage: "/images/placeholder-headshot-home.jpg",
       featured: false,
       credentials: [
         "2× District 4 Place Winner",

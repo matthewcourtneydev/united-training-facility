@@ -4,10 +4,11 @@ import {
   FaFacebookF,
   FaInstagram,
   FaTiktok,
-  FaXTwitter,
 } from "react-icons/fa6";
-import { assetPath } from "@/lib/assetPath";
+
+import Reveal from "@/components/motion/Reveal";
 import Container from "@/components/ui/Container";
+import { assetPath } from "@/lib/assetPath";
 
 export default function ContactPage() {
   return (
@@ -33,21 +34,28 @@ export default function ContactPage() {
           />
         </div>
 
+        {/* Hero content */}
         <Container className="relative z-10">
-          <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
-            Contact United
-          </p>
+          <Reveal delay={0.08}>
+            <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
+              Contact United
+            </p>
+          </Reveal>
 
-          <h1 className="mt-4 max-w-5xl font-[var(--font-oswald)] text-5xl font-bold uppercase leading-[0.95] sm:text-6xl lg:text-8xl">
-            Have Questions?
-            <br />
-            Get In Touch.
-          </h1>
+          <Reveal delay={0.18}>
+            <h1 className="mt-4 max-w-5xl font-[var(--font-oswald)] text-5xl font-bold uppercase leading-[0.95] sm:text-6xl lg:text-8xl">
+              Have Questions?
+              <br />
+              Get In Touch.
+            </h1>
+          </Reveal>
 
-          <p className="mt-8 max-w-3xl text-lg leading-8 text-neutral-400 sm:text-xl">
-            Questions about training, memberships, financial assistance, or
-            getting started? Reach out to United Training Facility.
-          </p>
+          <Reveal delay={0.3}>
+            <p className="mt-8 max-w-3xl text-lg leading-8 text-neutral-400 sm:text-xl">
+              Questions about training, memberships, financial assistance, or
+              getting started? Reach out to United Training Facility.
+            </p>
+          </Reveal>
         </Container>
       </section>
 
@@ -130,6 +138,7 @@ export default function ContactPage() {
                     </p>
                   </div>
                 </div>
+
                 {/* Social */}
                 <div className="grid gap-5 border-b border-black/10 py-7 sm:grid-cols-[180px_1fr]">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-400">
@@ -173,15 +182,6 @@ export default function ContactPage() {
                       >
                         <FaTiktok className="h-5 w-5" />
                       </Link>
-
-                      {/* <Link
-        href="#"
-        target="_blank"
-        aria-label="X"
-        className="flex h-11 w-11 items-center justify-center border border-black/15 text-black transition hover:border-[var(--primary-bright)] hover:bg-[var(--primary-bright)] hover:text-white"
-      >
-        <FaXTwitter className="h-5 w-5" />
-      </Link> */}
                     </div>
                   </div>
                 </div>
@@ -239,7 +239,7 @@ export default function ContactPage() {
 
             <Link
               href="/join-the-room"
-              className="w-fit bg-white px-8 py-4 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:bg-neutral-200"
+              className="w-fit bg-white px-8 py-4 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:-translate-y-0.5 hover:bg-neutral-200"
             >
               Join the Room
             </Link>

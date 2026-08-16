@@ -1,8 +1,12 @@
+import Image from "next/image";
 import Link from "next/link";
+
+import HeroImageMotion from "@/components/motion/HeroImageMotion";
+import Reveal from "@/components/motion/Reveal";
 import Container from "@/components/ui/Container";
 import { weeklySchedule } from "@/data/schedule";
-import { getUpcomingCalendarEvents } from "@/lib/googleCalendar";
 import { assetPath } from "@/lib/assetPath";
+import { getUpcomingCalendarEvents } from "@/lib/googleCalendar";
 
 const TIME_ZONE = "America/New_York";
 
@@ -48,42 +52,52 @@ export default async function SchedulePage() {
 
   return (
     <>
-{/* Hero */}
-<section className="relative min-h-[500px] overflow-hidden border-b border-white/10 bg-black sm:min-h-[560px] lg:min-h-[620px]">
-  {/* Hero image */}
-  <img
-    src={assetPath("/images/andy-rendos-double.png")}
-    alt=""
-    aria-hidden="true"
-    className="absolute inset-0 h-full w-full object-cover object-center"
-  />
+      {/* Hero */}
+      <section className="relative min-h-[500px] overflow-hidden border-b border-white/10 bg-black sm:min-h-[560px] lg:min-h-[620px]">
+        {/* Animated hero image */}
+        <HeroImageMotion>
+          <Image
+            src={assetPath("/images/andy-rendos-double.png")}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </HeroImageMotion>
 
-  {/* Left-side readability gradient */}
-  <div className="absolute inset-0 bg-gradient-to-r from-black via-black/55 to-transparent" />
+        {/* Left-side readability gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/55 to-transparent" />
 
-  {/* Subtle bottom fade */}
-  <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10" />
+        {/* Subtle bottom fade */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10" />
 
-  {/* Hero content */}
-  <Container className="relative flex min-h-[500px] items-center sm:min-h-[560px] lg:min-h-[620px]">
-    <div className="max-w-3xl py-20">
-      <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
-        Train With Us
-      </p>
+        {/* Hero content */}
+        <Container className="relative z-10 flex min-h-[500px] items-center sm:min-h-[560px] lg:min-h-[620px]">
+          <div className="max-w-3xl py-20">
+            <Reveal delay={0.08}>
+              <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
+                Train With Us
+              </p>
+            </Reveal>
 
-      <h1 className="mt-4 font-[var(--font-oswald)] text-5xl font-bold uppercase leading-[0.95] text-white sm:text-6xl lg:text-8xl">
-        Show Up.
-        <br />
-        Put In the Work.
-      </h1>
+            <Reveal delay={0.18}>
+              <h1 className="mt-4 font-[var(--font-oswald)] text-5xl font-bold uppercase leading-[0.95] text-white sm:text-6xl lg:text-8xl">
+                Show Up.
+                <br />
+                Put In the Work.
+              </h1>
+            </Reveal>
 
-      <p className="mt-8 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
-        All regular practices are held at United Training Facility in Athens,
-        Pennsylvania.
-      </p>
-    </div>
-  </Container>
-</section>
+            <Reveal delay={0.3}>
+              <p className="mt-8 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
+                All regular practices are held at United Training Facility in
+                Athens, Pennsylvania.
+              </p>
+            </Reveal>
+          </div>
+        </Container>
+      </section>
 
       {/* Weekly schedule */}
       <section className="bg-neutral-100 py-20 text-black sm:py-24">
@@ -136,7 +150,7 @@ export default async function SchedulePage() {
           United
         </div>
 
-        <Container className="relative">
+        <Container className="relative z-10">
           <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr] lg:gap-20">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
@@ -220,7 +234,7 @@ export default async function SchedulePage() {
       <section className="relative overflow-hidden bg-[var(--primary)] py-16 text-white sm:py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_50%,rgba(255,255,255,0.08),transparent_40%)]" />
 
-        <Container className="relative">
+        <Container className="relative z-10">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.28em] text-white/60">
@@ -239,7 +253,7 @@ export default async function SchedulePage() {
             <Link
               href="https://www.google.com/maps/search/?api=1&query=310+S+Main+St+Athens+PA+18810"
               target="_blank"
-              className="w-fit bg-white px-7 py-3.5 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:bg-neutral-200"
+              className="w-fit bg-white px-7 py-3.5 text-sm font-bold uppercase tracking-[0.16em] text-black transition duration-300 hover:-translate-y-0.5 hover:bg-neutral-200"
             >
               Get Directions ↗
             </Link>

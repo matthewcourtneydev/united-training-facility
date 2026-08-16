@@ -1,12 +1,17 @@
+import Image from "next/image";
+
+import HeroImageMotion from "@/components/motion/HeroImageMotion";
+import Reveal from "@/components/motion/Reveal";
 import Container from "@/components/ui/Container";
 import { coaches } from "@/data/coaches";
-import Image from "next/image";
 import { assetPath } from "@/lib/assetPath";
 
-const featuredCoaches = coaches.filter((coach) => coach.credentials.length > 0);
+const featuredCoaches = coaches.filter(
+  (coach) => coach.credentials.length > 0,
+);
 
 const upcomingCoaches = coaches.filter(
-  (coach) => coach.credentials.length === 0
+  (coach) => coach.credentials.length === 0,
 );
 
 export default function CoachesPage() {
@@ -14,11 +19,17 @@ export default function CoachesPage() {
     <>
       {/* Hero */}
       <section className="relative min-h-[520px] overflow-hidden border-b border-white/10 bg-black sm:min-h-[600px] lg:min-h-[680px]">
-        <img
-          src={assetPath("/images/ncaa-arena.jpg")}
-          alt="NCAA Division I Wrestling Championships arena"
-          className="absolute inset-0 h-full w-full object-cover object-center"
-        />
+        {/* Animated arena image */}
+        <HeroImageMotion>
+          <Image
+            src={assetPath("/images/ncaa-arena.jpg")}
+            alt="NCAA Division I Wrestling Championships arena"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </HeroImageMotion>
 
         {/* Overall image treatment */}
         <div className="absolute inset-0 bg-black/20" />
@@ -29,23 +40,30 @@ export default function CoachesPage() {
         {/* Bottom fade */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10" />
 
-        <Container className="relative flex min-h-[520px] items-center py-20 sm:min-h-[600px] sm:py-24 lg:min-h-[680px]">
+        {/* Hero content */}
+        <Container className="relative z-10 flex min-h-[520px] items-center py-20 sm:min-h-[600px] sm:py-24 lg:min-h-[680px]">
           <div className="max-w-4xl">
-            <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
-              Our Coaches
-            </p>
+            <Reveal delay={0.08}>
+              <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
+                Our Coaches
+              </p>
+            </Reveal>
 
-            <h1 className="mt-4 font-[var(--font-oswald)] text-5xl font-bold uppercase leading-[0.95] text-white sm:text-6xl lg:text-8xl">
-              Experience That
-              <br />
-              Elevates the Room.
-            </h1>
+            <Reveal delay={0.18}>
+              <h1 className="mt-4 font-[var(--font-oswald)] text-5xl font-bold uppercase leading-[0.95] text-white sm:text-6xl lg:text-8xl">
+                Experience That
+                <br />
+                Elevates the Room.
+              </h1>
+            </Reveal>
 
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-white/75 sm:text-xl">
-              United brings together accomplished wrestlers and coaches
-              committed to developing the next generation of athletes on and off
-              the mat.
-            </p>
+            <Reveal delay={0.3}>
+              <p className="mt-8 max-w-2xl text-lg leading-8 text-white/75 sm:text-xl">
+                United brings together accomplished wrestlers and coaches
+                committed to developing the next generation of athletes on and
+                off the mat.
+              </p>
+            </Reveal>
           </div>
         </Container>
       </section>
@@ -67,8 +85,9 @@ export default function CoachesPage() {
               coaching come together in one room.
             </p>
           </div>
+
           <div className="grid gap-6 md:grid-cols-2">
-            {featuredCoaches.map((coach, index) => (
+            {featuredCoaches.map((coach) => (
               <article
                 key={coach.slug}
                 className="group overflow-hidden border border-black/10 bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_34px_rgba(0,0,0,0.12)]"
@@ -144,8 +163,8 @@ export default function CoachesPage() {
             </div>
 
             <p className="max-w-2xl text-lg leading-8 text-white/80">
-              Different backgrounds and experiences come together with one goal:
-              helping every athlete in the room get better.
+              Different backgrounds and experiences come together with one
+              goal: helping every athlete in the room get better.
             </p>
           </div>
         </Container>
