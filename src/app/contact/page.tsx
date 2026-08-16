@@ -25,7 +25,7 @@ export default function ContactPage() {
         {/* Eagle watermark */}
         <div className="pointer-events-none absolute right-[8%] top-1/2 hidden h-[320px] w-[400px] -translate-y-1/2 opacity-[0.07] lg:block">
           <Image
-            src="/images/logo-no-text.png"
+            src={assetPath("/images/logo-no-text.png")}
             alt=""
             fill
             sizes="400px"

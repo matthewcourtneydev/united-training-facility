@@ -9,21 +9,21 @@ export default async function SiteAlert() {
 
   const label =
     alert.type === "cancelled"
-      ? "Schedule Update"
+      ? "Practice Cancelled"
       : alert.type === "delayed"
         ? "Schedule Delay"
         : "United Notice";
 
   return (
-    <div className="relative z-[60] border-b border-white/10 bg-[var(--primary)] text-white">
-      <div className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-3 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:px-8">
-        <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/60">
+<div className="border-b border-white/10 bg-[var(--primary)] text-white">
+      <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-2.5 text-center sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:px-8 sm:py-3">
+        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 sm:text-xs">
           {label}
         </p>
 
         <span className="hidden text-white/30 sm:inline">•</span>
 
-        <p className="text-sm font-bold uppercase tracking-[0.08em]">
+        <p className="text-xs font-bold uppercase tracking-[0.08em] sm:text-sm">
           {alert.message}
         </p>
       </div>

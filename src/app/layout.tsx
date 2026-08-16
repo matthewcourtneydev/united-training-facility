@@ -30,8 +30,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${oswald.variable}`}>
         <ScrollToTop />
-        <SiteAlert />
-        <Header />
+        <div className="sticky top-0 z-[70]">
+          <SiteAlert />
+          <Header />
+        </div>
         <main>{children}</main>
         <Footer />
       </body>
