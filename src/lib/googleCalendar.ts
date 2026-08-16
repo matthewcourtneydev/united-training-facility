@@ -56,22 +56,19 @@ export async function getUpcomingCalendarEvents(
 
   try {
     const response = await fetch(calendarUrl, {
-        next: {
-          revalidate: 60,
-        },
-      });
-
+      cache: "no-store",
+    });
+  
     if (!response.ok) {
       throw new Error(
         `Google Calendar request failed with status ${response.status}`,
       );
     }
-
+  
     const calendarText = await response.text();
     const calendar = ical.sync.parseICS(calendarText);
-
+  
     const now = new Date();
-
     const events: CalendarEvent[] = Object.values(calendar)
       .flatMap((entry): CalendarEvent[] => {
         if (!entry || entry.type !== "VEVENT") {
