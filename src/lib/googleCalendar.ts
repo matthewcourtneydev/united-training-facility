@@ -112,3 +112,78 @@ export async function getUpcomingCalendarEvents(
     return [];
   }
 }
+
+
+export type SiteAlertType = "cancelled" | "delayed" | "notice";
+
+export type SiteAlert = {
+  id: string;
+  type: SiteAlertType;
+  message: string;
+  start: Date;
+  end: Date;
+};
+
+export async function getSiteAlert(): Promise<SiteAlert | null> {
+    const events = await getUpcomingCalendarEvents(20);
+  
+    const now = new Date();
+    const timeZone = "America/New_York";
+  
+    const getDateKey = (date: Date) =>
+      new Intl.DateTimeFormat("en-CA", {
+        timeZone,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }).format(date);
+  
+    const todayKey = getDateKey(now);
+  
+    const alertEvent = events.find((event) => {
+      const title = event.title.trim().toUpperCase();
+  
+      const isAlert =
+        title.startsWith("CANCELLED") ||
+        title.startsWith("DELAYED") ||
+        title.startsWith("NOTICE");
+  
+      if (!isAlert) {
+        return false;
+      }
+  
+      const eventDateKey = getDateKey(event.start);
+      const isToday = eventDateKey === todayKey;
+  
+      return isToday && now <= event.end;
+    });
+  
+    if (!alertEvent) {
+      return null;
+    }
+  
+    const rawTitle = alertEvent.title.trim();
+    const normalized = rawTitle.toUpperCase();
+  
+    let type: SiteAlertType = "notice";
+  
+    if (normalized.startsWith("CANCELLED")) {
+      type = "cancelled";
+    } else if (normalized.startsWith("DELAYED")) {
+      type = "delayed";
+    }
+  
+    const message = rawTitle
+      .replace(/^CANCELLED\s*[—–:-]?\s*/i, "")
+      .replace(/^DELAYED\s*[—–:-]?\s*/i, "")
+      .replace(/^NOTICE\s*[—–:-]?\s*/i, "")
+      .trim();
+  
+    return {
+      id: alertEvent.id,
+      type,
+      message: message || rawTitle,
+      start: alertEvent.start,
+      end: alertEvent.end,
+    };
+  }

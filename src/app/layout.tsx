@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ScrollToTop from "@/components/layout/ScrollToTop";
+import SiteAlert from "@/components/layout/SiteAlert";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,6 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${oswald.variable}`}>
         <ScrollToTop />
+        <SiteAlert />
         <Header />
         <main>{children}</main>
         <Footer />

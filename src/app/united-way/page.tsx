@@ -1,7 +1,8 @@
 import Image from "next/image";
-import { assetPath } from "@/lib/assetPath";
+
 import Container from "@/components/ui/Container";
 import { fundamentals } from "@/data/fundamentals";
+import { assetPath } from "@/lib/assetPath";
 
 export default function UnitedWayPage() {
   return (
@@ -12,18 +13,18 @@ export default function UnitedWayPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_45%,rgba(20,95,194,0.18),transparent_30%)]" />
 
         {/* Giant 12 */}
-        <div className="pointer-events-none absolute right-[8%] top-1/2 hidden -translate-y-1/2 font-[var(--font-oswald)] text-[24rem] font-bold leading-none text-white/[0.025] lg:block">
+        <div className="pointer-events-none absolute right-[4%] top-1/2 z-[1] hidden -translate-y-1/2 font-[var(--font-oswald)] text-[14rem] font-bold leading-none text-white/[0.035] md:block lg:right-[8%] lg:text-[24rem] lg:text-white/[0.04]">
           12
         </div>
 
         {/* Eagle watermark */}
-        <div className="pointer-events-none absolute right-[5%] top-1/2 hidden h-[360px] w-[460px] -translate-y-1/2 opacity-[0.09] lg:block">
+        <div className="pointer-events-none absolute right-[1%] top-1/2 z-[2] hidden h-[260px] w-[340px] -translate-y-1/2 md:block lg:right-[4%] lg:h-[380px] lg:w-[500px]">
           <Image
-            src={assetPath("/images/badge.png")}
+            src={assetPath("/images/logo-no-text.png")}
             alt=""
             fill
-            sizes="460px"
-            className="object-contain"
+            sizes="(min-width: 1024px) 500px, 340px"
+            className="scale-[1.15] object-contain opacity-[0.11] brightness-110 lg:scale-[1.25] lg:opacity-[0.14]"
           />
         </div>
 
@@ -54,11 +55,12 @@ export default function UnitedWayPage() {
       <section className="relative overflow-hidden bg-[var(--primary)] py-20 text-white sm:py-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_50%,rgba(255,255,255,0.10),transparent_40%)]" />
 
-        <div className="pointer-events-none absolute -right-8 top-1/2 hidden -translate-y-1/2 font-[var(--font-oswald)] text-[13rem] font-bold uppercase leading-none text-white/[0.025] lg:block">
+        {/* Decorative United word */}
+        <div className="pointer-events-none absolute -right-6 top-1/2 hidden -translate-y-1/2 font-[var(--font-oswald)] text-[9rem] font-bold uppercase leading-none text-white/[0.02] md:block lg:-right-8 lg:text-[13rem] lg:text-white/[0.025]">
           United
         </div>
 
-        <Container className="relative">
+        <Container className="relative z-10">
           <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-20">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.28em] text-white/60">
@@ -68,12 +70,12 @@ export default function UnitedWayPage() {
               <h2 className="mt-4 font-[var(--font-oswald)] text-5xl font-bold uppercase leading-[0.95] sm:text-6xl">
                 One Fundamental.
                 <br />
-                Every Week.
+                Every Month.
               </h2>
             </div>
 
             <p className="max-w-3xl text-lg leading-8 text-white/80">
-              Each week, we focus on one Fundamental by discussing what it
+              Each month, we focus on one fundamental by discussing what it
               means, how it applies to wrestling, and how we can carry it into
               our lives beyond the mat.
             </p>
@@ -92,12 +94,10 @@ export default function UnitedWayPage() {
         />
 
         <div className="absolute inset-0 bg-black/20" />
-
         <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-transparent to-black/10" />
-
         <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/20" />
 
-        <Container className="relative flex h-full items-end pb-10 sm:pb-14">
+        <Container className="relative z-10 flex h-full items-end pb-10 sm:pb-14">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
               The Standard
@@ -159,17 +159,18 @@ export default function UnitedWayPage() {
       <section className="relative overflow-hidden bg-[var(--primary)] py-24 sm:py-28">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.12),transparent_45%)]" />
 
-        <div className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[420px] w-[520px] -translate-x-1/2 -translate-y-1/2 opacity-[0.035] lg:block">
+        {/* Eagle watermark */}
+        <div className="pointer-events-none absolute right-[2%] top-1/2 z-[1] hidden h-[240px] w-[320px] -translate-y-1/2 md:block lg:right-[5%] lg:h-[360px] lg:w-[460px]">
           <Image
             src={assetPath("/images/logo-no-text.png")}
             alt=""
             fill
-            sizes="520px"
-            className="object-contain"
+            sizes="(min-width: 1024px) 460px, 320px"
+            className="scale-[1.1] object-contain opacity-[0.06] brightness-110 lg:scale-[1.2] lg:opacity-[0.08]"
           />
         </div>
 
-        <Container className="relative">
+        <Container className="relative z-10">
           <div className="mx-auto max-w-5xl text-center">
             <p className="text-sm font-bold uppercase tracking-[0.28em] text-white/60">
               The United Standard

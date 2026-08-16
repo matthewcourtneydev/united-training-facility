@@ -27,7 +27,7 @@ export default function Footer() {
               className="inline-block"
             >
               <Image
-                src={assetPath("/images/white-text.png")}
+                src={assetPath("/images/blue-text.png")}
                 alt="United Training Facility"
                 width={320}
                 height={120}

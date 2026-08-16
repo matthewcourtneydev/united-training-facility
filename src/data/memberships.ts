@@ -21,6 +21,7 @@ export const memberships = [
         "Free access to workout plans",
         "Free access to strength and conditioning workouts",
         "15% off United camps and clinics",
+        "Option available for multiple members of the same immediate family."
       ],
     },
     {
@@ -45,6 +46,7 @@ export const memberships = [
         "Free access to workout plans",
         "Free access to strength and conditioning workouts",
         "15% off United camps and clinics",
+        "Option available for multiple members of the same immediate family."
       ],
     },
     {
