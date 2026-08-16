@@ -14,6 +14,7 @@ const upcomingCoaches = coaches.filter(
   (coach) => coach.credentials.length === 0,
 );
 
+
 export default function CoachesPage() {
   return (
     <>

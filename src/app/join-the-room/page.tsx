@@ -149,7 +149,7 @@ export default function JoinTheRoomPage() {
             </div>
 
             <Link
-              href="/contact"
+              href="https://unitedtf.pushpress.com/landing/plans/plan_d538f50b939a48/eyJzdGFydF9kYXRlIjoiMDkvMDEvMjAyNiJ9/login"
               className="w-fit bg-white px-7 py-3.5 text-sm font-bold uppercase tracking-[0.16em] text-black transition duration-300 hover:-translate-y-0.5 hover:bg-neutral-200"
             >
               Claim Your Free Trial
