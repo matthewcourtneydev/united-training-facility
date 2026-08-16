@@ -38,7 +38,7 @@ export const memberships = [
     },
     {
       name: "Middle School & Youth Family",
-      price: "$100",
+      price: "$105",
       billing: "/ month",
       registrationUrl: "https://unitedtf.pushpress.com/landing/plans/plan_e1f62917c3ff4f/eyJzdGFydF9kYXRlIjoiMDkvMDEvMjAyNiJ9/login",
       benefits: [
