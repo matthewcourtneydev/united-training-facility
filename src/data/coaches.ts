@@ -18,8 +18,8 @@ export const coaches = [
       slug: "dave-patrick",
       name: "Dave Patrick",
       role: "Founder, United Training Facility",
-      image: "/images/headshot-placeholder.jpg",
-      homeImage: "/images/placeholder-headshot-home.jpg",
+      image: "/images/dave-headshot.jpg",
+      homeImage: "/images/dave-headshot-home.jpg",
       featured: true,
       credentials: [
         "3× PIAA Medalist for Wyalusing",

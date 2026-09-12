@@ -44,6 +44,10 @@ function getTextValue(value: unknown): string | undefined {
   return undefined;
 }
 
+function getDateKey(date: Date) {
+  return date.toISOString().slice(0, 10);
+}
+
 export async function getUpcomingCalendarEvents(
   limit = 6,
 ): Promise<CalendarEvent[]> {
@@ -58,143 +62,257 @@ export async function getUpcomingCalendarEvents(
     const response = await fetch(calendarUrl, {
       cache: "no-store",
     });
-  
+
     if (!response.ok) {
       throw new Error(
         `Google Calendar request failed with status ${response.status}`,
       );
     }
-  
+
     const calendarText = await response.text();
     const calendar = ical.sync.parseICS(calendarText);
-  
+
     const now = new Date();
-    const events: CalendarEvent[] = Object.values(calendar)
-      .flatMap((entry): CalendarEvent[] => {
-        if (!entry || entry.type !== "VEVENT") {
-          return [];
-        }
 
-        const start = entry.start;
-        const end = entry.end;
+    // We only need enough future occurrences to populate the website.
+    // Six months gives us plenty of room for recurring practices/events.
+    const recurrenceEnd = new Date(now);
+    recurrenceEnd.setMonth(recurrenceEnd.getMonth() + 6);
 
-        if (!(start instanceof Date) || !(end instanceof Date)) {
-          return [];
-        }
+    const events: CalendarEvent[] = [];
 
-        const title = getTextValue(entry.summary) ?? "United Event";
-        const location = getTextValue(entry.location);
-        const description = getTextValue(entry.description);
-        const uid = getTextValue(entry.uid);
+    for (const entry of Object.values(calendar)) {
+      if (!entry || entry.type !== "VEVENT") {
+        continue;
+      }
 
-        return [
-          {
-            id: uid ?? `${title}-${start.toISOString()}`,
+      const start = entry.start;
+      const end = entry.end;
+
+      if (!(start instanceof Date) || !(end instanceof Date)) {
+        continue;
+      }
+
+      const title = getTextValue(entry.summary) ?? "United Event";
+      const location = getTextValue(entry.location);
+      const description = getTextValue(entry.description);
+      const uid = getTextValue(entry.uid);
+
+      const duration = end.getTime() - start.getTime();
+
+      /**
+       * Recurring Google Calendar event
+       */
+      if (entry.rrule) {
+        const occurrenceStarts = entry.rrule.between(
+          now,
+          recurrenceEnd,
+          true,
+        );
+
+        for (const occurrenceStart of occurrenceStarts) {
+          const occurrenceEnd = new Date(
+            occurrenceStart.getTime() + duration,
+          );
+
+          /**
+           * Skip excluded recurrence dates.
+           *
+           * Google Calendar uses EXDATE when one occurrence of a recurring
+           * event has been deleted/cancelled.
+           */
+          const exdates = entry.exdate
+            ? Object.values(entry.exdate)
+            : [];
+
+          const excluded = exdates.some((excludedDate) => {
+            return (
+              excludedDate instanceof Date &&
+              getDateKey(excludedDate) === getDateKey(occurrenceStart)
+            );
+          });
+
+          if (excluded) {
+            continue;
+          }
+
+          /**
+           * If Google Calendar contains an overridden occurrence
+           * (for example one practice was moved to another time),
+           * use that occurrence instead of the regular recurrence.
+           */
+          const recurrenceKey = getDateKey(occurrenceStart);
+
+          const overriddenOccurrence =
+            entry.recurrences &&
+            Object.values(entry.recurrences).find((recurrence) => {
+              if (
+                !recurrence ||
+                recurrence.type !== "VEVENT" ||
+                !(recurrence.start instanceof Date)
+              ) {
+                return false;
+              }
+
+              return getDateKey(recurrence.start) === recurrenceKey;
+            });
+
+          if (
+            overriddenOccurrence &&
+            overriddenOccurrence.type === "VEVENT" &&
+            overriddenOccurrence.start instanceof Date &&
+            overriddenOccurrence.end instanceof Date
+          ) {
+            events.push({
+              id: `${uid ?? title}-${overriddenOccurrence.start.toISOString()}`,
+              title:
+                getTextValue(overriddenOccurrence.summary) ??
+                title,
+              start: overriddenOccurrence.start,
+              end: overriddenOccurrence.end,
+              location:
+                getTextValue(overriddenOccurrence.location) ??
+                location,
+              description:
+                getTextValue(overriddenOccurrence.description) ??
+                description,
+              allDay:
+                overriddenOccurrence.datetype === "date",
+            });
+
+            continue;
+          }
+
+          events.push({
+            id: `${uid ?? title}-${occurrenceStart.toISOString()}`,
             title,
-            start,
-            end,
+            start: occurrenceStart,
+            end: occurrenceEnd,
             location,
             description,
             allDay: entry.datetype === "date",
-          },
-        ];
-      })
-      .filter((event) => event.end >= now)
-      .sort((a, b) => a.start.getTime() - b.start.getTime())
-      .slice(0, limit);
+          });
+        }
 
-    return events;
+        continue;
+      }
+
+      /**
+       * Normal one-time Google Calendar event
+       */
+      if (end >= now) {
+        events.push({
+          id: uid ?? `${title}-${start.toISOString()}`,
+          title,
+          start,
+          end,
+          location,
+          description,
+          allDay: entry.datetype === "date",
+        });
+      }
+    }
+
+    return events
+      .filter((event) => event.end >= now)
+      .sort(
+        (a, b) =>
+          a.start.getTime() - b.start.getTime(),
+      )
+      .slice(0, limit);
   } catch (error) {
     console.error("Unable to load Google Calendar:", error);
     return [];
   }
 }
 
-
-export type SiteAlertType = "cancelled" | "delayed" | "notice";
+export type SiteAlertType =
+  | "cancelled"
+  | "delayed"
+  | "notice";
 
 export type SiteAlert = {
-    id: string;
-    type: SiteAlertType;
-    message: string;
-    start: Date;
-    end: Date;
-    originalStart?: string;
-  };
+  id: string;
+  type: SiteAlertType;
+  message: string;
+  start: Date;
+  end: Date;
+  originalStart?: string;
+};
 
 export async function getSiteAlert(): Promise<SiteAlert | null> {
-    const events = await getUpcomingCalendarEvents(20);
-  
-    const now = new Date();
-    const timeZone = "America/New_York";
-  
-    const getDateKey = (date: Date) =>
-      new Intl.DateTimeFormat("en-CA", {
-        timeZone,
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-      }).format(date);
-  
-    const todayKey = getDateKey(now);
-  
-    const alertEvent = events.find((event) => {
-      const title = event.title.trim().toUpperCase();
-  
-      const isAlert =
-        title.startsWith("CANCELLED") ||
-        title.startsWith("DELAYED") ||
-        title.startsWith("NOTICE");
-  
-      if (!isAlert) {
-        return false;
-      }
-  
-      const eventDateKey = getDateKey(event.start);
-      const isToday = eventDateKey === todayKey;
-  
-      return isToday && now <= event.end;
-    });
-  
-    if (!alertEvent) {
-      return null;
+  const events = await getUpcomingCalendarEvents(20);
+
+  const now = new Date();
+  const timeZone = "America/New_York";
+
+  const getLocalDateKey = (date: Date) =>
+    new Intl.DateTimeFormat("en-CA", {
+      timeZone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(date);
+
+  const todayKey = getLocalDateKey(now);
+
+  const alertEvent = events.find((event) => {
+    const title = event.title.trim().toUpperCase();
+
+    const isAlert =
+      title.startsWith("CANCELLED") ||
+      title.startsWith("DELAYED") ||
+      title.startsWith("NOTICE");
+
+    if (!isAlert) {
+      return false;
     }
-  
-    const rawTitle = alertEvent.title.trim();
-    const normalized = rawTitle.toUpperCase();
-  
-    let type: SiteAlertType = "notice";
-  
-    if (normalized.startsWith("CANCELLED")) {
-      type = "cancelled";
-    } else if (normalized.startsWith("DELAYED")) {
-      type = "delayed";
-    }
-  
-    const delayedMatch = rawTitle.match(
-        /^DELAYED\s+(.+?)\s*[-—–:]\s*(.+)$/i,
-      );
-      
-      const originalStart =
-        type === "delayed" && delayedMatch
-          ? delayedMatch[1].trim()
-          : undefined;
-      
-      const message =
-        type === "delayed" && delayedMatch
-          ? delayedMatch[2].trim()
-          : rawTitle
-              .replace(/^CANCELLED\s*[—–:-]?\s*/i, "")
-              .replace(/^DELAYED\s*[—–:-]?\s*/i, "")
-              .replace(/^NOTICE\s*[—–:-]?\s*/i, "")
-              .trim();
-      
-      return {
-        id: alertEvent.id,
-        type,
-        message: message || rawTitle,
-        start: alertEvent.start,
-        end: alertEvent.end,
-        originalStart,
-      };
+
+    const eventDateKey = getLocalDateKey(event.start);
+    const isToday = eventDateKey === todayKey;
+
+    return isToday && now <= event.end;
+  });
+
+  if (!alertEvent) {
+    return null;
   }
+
+  const rawTitle = alertEvent.title.trim();
+  const normalized = rawTitle.toUpperCase();
+
+  let type: SiteAlertType = "notice";
+
+  if (normalized.startsWith("CANCELLED")) {
+    type = "cancelled";
+  } else if (normalized.startsWith("DELAYED")) {
+    type = "delayed";
+  }
+
+  const delayedMatch = rawTitle.match(
+    /^DELAYED\s+(.+?)\s*[-—–:]\s*(.+)$/i,
+  );
+
+  const originalStart =
+    type === "delayed" && delayedMatch
+      ? delayedMatch[1].trim()
+      : undefined;
+
+  const message =
+    type === "delayed" && delayedMatch
+      ? delayedMatch[2].trim()
+      : rawTitle
+          .replace(/^CANCELLED\s*[—–:-]?\s*/i, "")
+          .replace(/^DELAYED\s*[—–:-]?\s*/i, "")
+          .replace(/^NOTICE\s*[—–:-]?\s*/i, "")
+          .trim();
+
+  return {
+    id: alertEvent.id,
+    type,
+    message: message || rawTitle,
+    start: alertEvent.start,
+    end: alertEvent.end,
+    originalStart,
+  };
+}

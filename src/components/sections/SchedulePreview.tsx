@@ -2,26 +2,45 @@ import Link from "next/link";
 
 import Container from "@/components/ui/Container";
 import { weeklySchedule } from "@/data/schedule";
+import { getUpcomingCalendarEvents } from "@/lib/googleCalendar";
 
-const upcomingEvents = [
-  {
-    date: "Aug 16",
-    title: "Sunday Practice",
-    time: "5:00–6:45 PM",
-  },
-  {
-    date: "Aug 17",
-    title: "Monday Practice",
-    time: "6:00–7:45 PM",
-  },
-  {
-    date: "Aug 19",
-    title: "Wednesday Practice",
-    time: "6:00–7:45 PM",
-  },
-];
+export const dynamic = "force-dynamic";
 
-export default function SchedulePreview() {
+const TIME_ZONE = "America/New_York";
+
+function formatMonth(date: Date) {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    timeZone: TIME_ZONE,
+  }).format(date);
+}
+
+function formatDay(date: Date) {
+  return new Intl.DateTimeFormat("en-US", {
+    day: "numeric",
+    timeZone: TIME_ZONE,
+  }).format(date);
+}
+
+function formatTime(date: Date) {
+  return new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: TIME_ZONE,
+  }).format(date);
+}
+
+function formatEventTime(start: Date, end: Date, allDay: boolean) {
+  if (allDay) {
+    return "All Day";
+  }
+
+  return `${formatTime(start)}–${formatTime(end)}`;
+}
+
+export default async function SchedulePreview() {
+  const upcomingEvents = await getUpcomingCalendarEvents(3);
+
   return (
     <section className="border-y border-white/10 bg-[linear-gradient(135deg,#111_0%,#181818_50%,#101010_100%)] py-20 sm:py-24">
       <Container>
@@ -89,21 +108,19 @@ export default function SchedulePreview() {
             </h3>
 
             <div className="mt-8 border-t border-white/10">
-              {upcomingEvents.map((event) => {
-                const [month, day] = event.date.split(" ");
-
-                return (
+              {upcomingEvents.length > 0 ? (
+                upcomingEvents.map((event) => (
                   <article
-                    key={`${event.date}-${event.title}`}
+                    key={event.id}
                     className="grid grid-cols-[70px_1fr] gap-5 border-b border-white/10 py-5"
                   >
                     <div>
                       <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--primary-bright)]">
-                        {month}
+                        {formatMonth(event.start)}
                       </p>
 
                       <p className="font-[var(--font-oswald)] text-3xl font-bold leading-none text-[var(--primary-bright)]">
-                        {day}
+                        {formatDay(event.start)}
                       </p>
                     </div>
 
@@ -113,12 +130,28 @@ export default function SchedulePreview() {
                       </h4>
 
                       <p className="mt-1 text-sm text-neutral-500">
-                        {event.time}
+                        {formatEventTime(
+                          event.start,
+                          event.end,
+                          event.allDay,
+                        )}
                       </p>
+
+                      {event.location && (
+                        <p className="mt-1 text-xs text-neutral-600">
+                          {event.location}
+                        </p>
+                      )}
                     </div>
                   </article>
-                );
-              })}
+                ))
+              ) : (
+                <div className="border-b border-white/10 py-6">
+                  <p className="text-sm text-neutral-500">
+                    No upcoming calendar events are currently scheduled.
+                  </p>
+                </div>
+              )}
             </div>
 
             <Link

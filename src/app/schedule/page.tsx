@@ -8,6 +8,8 @@ import { weeklySchedule } from "@/data/schedule";
 import { assetPath } from "@/lib/assetPath";
 import { getUpcomingCalendarEvents } from "@/lib/googleCalendar";
 
+export const dynamic = "force-dynamic";
+
 const TIME_ZONE = "America/New_York";
 
 function formatMonth(date: Date) {
@@ -48,7 +50,7 @@ function formatEventTime(start: Date, end: Date, allDay: boolean) {
 }
 
 export default async function SchedulePage() {
-  const upcomingEvents = await getUpcomingCalendarEvents(8);
+  const upcomingEvents = await getUpcomingCalendarEvents(5);
 
   return (
     <>

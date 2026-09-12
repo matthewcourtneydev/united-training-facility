@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
+
 import { Inter, Oswald } from "next/font/google";
+
 import "./globals.css";
-import Header from "@/components/layout/Header";
+
 import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
 import ScrollToTop from "@/components/layout/ScrollToTop";
 import SiteAlert from "@/components/layout/SiteAlert";
+
+export const dynamic = "force-dynamic";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -52,9 +57,12 @@ const jsonLd = {
   "@type": "SportsActivityLocation",
   name: "United Training Facility",
   url: "https://unitedtrainingfacility.com",
+
   description:
     "United Training Facility provides wrestling training, coaching, camps, clinics, and athlete development in Athens, Pennsylvania.",
+
   sport: "Wrestling",
+
   address: {
     "@type": "PostalAddress",
     streetAddress: "310 S Main St",
@@ -63,6 +71,7 @@ const jsonLd = {
     postalCode: "18810",
     addressCountry: "US",
   },
+
   sameAs: [
     "https://www.instagram.com/unitedtrainingfacility?igsh=MXdlb2R1Z2pqYTJmcg==&igsi=MXdlb2R1Z2pqYTJmcg==",
     "https://www.facebook.com/p/United-Training-Facility-100092605913030/",
@@ -84,12 +93,16 @@ export default function RootLayout({
             __html: JSON.stringify(jsonLd),
           }}
         />
+
         <ScrollToTop />
+
         <div className="sticky top-0 z-[70]">
           <SiteAlert />
           <Header />
         </div>
+
         <main>{children}</main>
+
         <Footer />
       </body>
     </html>
