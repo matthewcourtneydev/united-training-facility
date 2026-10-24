@@ -27,9 +27,9 @@ export default function RaffleBanner() {
           {/* Mobile */}
           <div className="flex items-center gap-2 sm:hidden">
             <p className="text-center text-[11px] font-bold uppercase tracking-[0.08em]">
-              Get Your Raffle Tickets
+              United Kickoff & Raffle
               <span className="ml-2 text-[#9dccff]">
-                — Click Here
+                — Details Here
               </span>
             </p>
           </div>
