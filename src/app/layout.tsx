@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import { Inter, Oswald } from "next/font/google";
@@ -6,6 +7,7 @@ import "./globals.css";
 
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
+import RaffleBanner from "@/components/layout/RaffleBanner";
 import ScrollToTop from "@/components/layout/ScrollToTop";
 import SiteAlert from "@/components/layout/SiteAlert";
 
@@ -96,8 +98,15 @@ export default function RootLayout({
 
         <ScrollToTop />
 
+        {/* Shared sticky header stack */}
         <div className="sticky top-0 z-[70]">
+          {/* Priority 1: Schedule changes and cancellations */}
           <SiteAlert />
+
+          {/* Priority 2: Temporary fundraiser announcement */}
+          <RaffleBanner />
+
+          {/* Main navigation */}
           <Header />
         </div>
 
