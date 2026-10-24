@@ -73,7 +73,7 @@ export default function RafflePage() {
                 href="#prizes"
                 className="bg-[var(--primary)] px-7 py-4 text-sm font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:-translate-y-0.5 hover:brightness-110"
               >
-                Raffle Detauls →
+                Raffle Details →
               </a>
 
               <a
