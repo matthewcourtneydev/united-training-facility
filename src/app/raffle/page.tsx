@@ -156,7 +156,7 @@ export default function RafflePage() {
 
             <div className="bg-white p-8 text-center">
               <p className="font-[var(--font-oswald)] text-5xl font-bold text-[var(--primary)]">
-              $2,000+
+                $2,000+
               </p>
               <p className="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-neutral-500">
                 Advertised Prize Value
@@ -169,13 +169,15 @@ export default function RafflePage() {
       {/* Prize showcase */}
       <section
         id="prizes"
-        className="relative overflow-hidden bg-[linear-gradient(135deg,#0d0d0d_0%,#171717_55%,#0d0d0d_100%)] py-20 text-white sm:py-24"
+        className="relative overflow-hidden bg-[linear-gradient(135deg,#061b3e_0%,#103e80_50%,#071e43_100%)] py-20 text-white sm:py-24"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_20%,rgba(20,95,194,0.13),transparent_35%)]" />
+        {/* Background accents */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,rgba(45,135,255,0.22),transparent_40%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_5%_90%,rgba(0,0,0,0.28),transparent_45%)]" />
 
         <Container className="relative z-10">
           <div className="mb-12 max-w-3xl">
-            <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
+            <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#8fc5ff]">
               The Raffle
             </p>
 
@@ -185,7 +187,7 @@ export default function RafflePage() {
               Six Chances to Win.
             </h2>
 
-            <p className="mt-5 text-base leading-7 text-neutral-400 sm:text-lg">
+            <p className="mt-5 text-base leading-7 text-blue-100/75 sm:text-lg">
               Explore the prize packages donated in support of United Training
               Facility. Choose the drawing you want to enter.
             </p>
@@ -195,36 +197,36 @@ export default function RafflePage() {
             {rafflePrizes.map((prize) => (
               <article
                 key={prize.id}
-                className="group flex flex-col border border-white/10 bg-white/[0.035] p-7 transition duration-300 hover:-translate-y-1 hover:border-[var(--primary-bright)]/50 hover:bg-white/[0.06] sm:p-8"
+                className="group flex flex-col border border-blue-200/15 bg-[#061a38]/80 p-7 shadow-[0_12px_35px_rgba(0,0,0,0.12)] transition duration-300 hover:-translate-y-1 hover:border-[#8fc5ff]/60 hover:bg-[#0a2853] hover:shadow-[0_18px_45px_rgba(0,0,0,0.22)] sm:p-8"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <p className="font-[var(--font-oswald)] text-5xl font-bold leading-none text-white/15 transition-colors duration-300 group-hover:text-[var(--primary-bright)]">
+                  <p className="font-[var(--font-oswald)] text-5xl font-bold leading-none text-blue-300/25 transition-colors duration-300 group-hover:text-[#8fc5ff]">
                     {String(prize.id).padStart(2, "0")}
                   </p>
 
-                  <span className="border border-white/15 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-neutral-300">
+                  <span className="border border-blue-200/20 bg-blue-400/[0.08] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-blue-100">
                     {formatCurrency(prize.value)} Value
                   </span>
                 </div>
 
-                <div className="mt-10 h-[2px] w-12 bg-[var(--primary)]" />
+                <div className="mt-10 h-[2px] w-12 bg-[#60a5fa] transition-all duration-300 group-hover:w-20" />
 
                 <h3 className="mt-6 font-[var(--font-oswald)] text-2xl font-bold uppercase leading-tight text-white sm:text-3xl">
                   {prize.title}
                 </h3>
 
-                <p className="mt-4 text-sm leading-7 text-neutral-400">
+                <p className="mt-4 text-sm leading-7 text-blue-100/70">
                   {prize.description}
                 </p>
 
                 {prize.contents.length > 0 && (
-                  <ul className="mt-6 space-y-3 border-t border-white/10 pt-6">
+                  <ul className="mt-6 space-y-3 border-t border-blue-200/15 pt-6">
                     {prize.contents.map((item) => (
                       <li
                         key={item}
-                        className="flex items-start gap-3 text-sm leading-6 text-neutral-400"
+                        className="flex items-start gap-3 text-sm leading-6 text-blue-100/75"
                       >
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-[var(--primary-bright)]" />
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-[#60a5fa]" />
                         {item}
                       </li>
                     ))}
@@ -232,39 +234,13 @@ export default function RafflePage() {
                 )}
 
                 <div className="mt-auto pt-8">
-                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--primary-bright)]">
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#8fc5ff]">
                     Prize Drawing #{prize.id}
                   </p>
                 </div>
               </article>
             ))}
           </div>
-        </Container>
-      </section>
-
-      {/* Interactive raffle ordering */}
-      <section
-        id="raffle-order"
-        className="scroll-mt-44 bg-neutral-100 py-20 text-black sm:scroll-mt-36 sm:py-24"
-      >
-        <Container>
-          <div className="mb-14 max-w-3xl">
-            <p className="text-sm font-bold uppercase tracking-[0.28em] text-[var(--primary-bright)]">
-              Support United
-            </p>
-
-            <h2 className="mt-4 font-[var(--font-oswald)] text-4xl font-bold uppercase leading-[0.98] sm:text-5xl lg:text-6xl">
-              Enter the Raffle.
-            </h2>
-
-            <p className="mt-5 text-base leading-7 text-neutral-600 sm:text-lg">
-              Select your prize drawings, enter your contact information, and
-              generate your Venmo payment memo. Coach Courtney will confirm your
-              entries by text after payment is verified.
-            </p>
-          </div>
-
-          <RaffleOrderForm />
         </Container>
       </section>
 

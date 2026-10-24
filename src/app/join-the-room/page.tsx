@@ -59,14 +59,19 @@ export default function JoinTheRoomPage() {
           </div>
 
           <div className="grid border-l border-t border-black/10 md:grid-cols-2">
-            {memberships.map((membership) => {
+            {memberships.map((membership, index) => {
               const hasRegistrationUrl =
                 membership.registrationUrl.trim() !== "";
 
               return (
                 <article
                   key={membership.name}
-                  className="group flex flex-col border-b border-r border-black/10 bg-white p-7 transition duration-300 hover:-translate-y-0.5 hover:bg-neutral-50 hover:shadow-[0_14px_30px_rgba(0,0,0,0.08)] sm:p-9"
+                  className={`group flex flex-col border-b border-r border-black/10 bg-white p-7 transition duration-300 hover:-translate-y-0.5 hover:bg-neutral-50 hover:shadow-[0_14px_30px_rgba(0,0,0,0.08)] sm:p-9 ${
+                    memberships.length % 2 !== 0 &&
+                    index === memberships.length - 1
+                      ? "md:col-span-2 md:items-center md:text-center"
+                      : ""
+                  }`}
                 >
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--primary-bright)]">
@@ -102,7 +107,14 @@ export default function JoinTheRoomPage() {
                     ))}
                   </ul>
 
-                  <div className="mt-auto pt-8">
+                  <div
+                    className={`mt-auto w-full pt-8 ${
+                      memberships.length % 2 !== 0 &&
+                      index === memberships.length - 1
+                        ? "md:max-w-[calc(50%-2.25rem)]"
+                        : ""
+                    }`}
+                  >
                     {hasRegistrationUrl ? (
                       <Link
                         href={membership.registrationUrl}

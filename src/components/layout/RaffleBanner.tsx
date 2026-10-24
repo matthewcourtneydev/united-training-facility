@@ -55,7 +55,7 @@ export default function RaffleBanner() {
             <span className="hidden text-white/35 lg:inline">•</span>
 
             <p className="font-bold uppercase tracking-[0.1em] text-[#9dccff] sm:text-xs lg:text-sm">
-              Click Here to Get Your Tickets
+              Click Here for Details
             </p>
           </div>
 

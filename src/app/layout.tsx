@@ -44,8 +44,21 @@ export const metadata: Metadata = {
     url: "https://unitedtrainingfacility.com",
     siteName: "United Training Facility",
     title: "United Training Facility | Wrestling Training in Athens, PA",
+    images: [
+      {
+        url: "/images/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "United Training Facility wrestling club",
+      },
+    ],
     description:
       "Wrestling training, coaching, camps, clinics, and athlete development in Athens, Pennsylvania.",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    images: ["/images/opengraph-image.png"],
   },
 
   robots: {

@@ -1,6 +1,6 @@
 export const memberships = [
     {
-      name: "High School",
+      name: "Monthly Membership",
       price: "$125",
       billing: "/ month",
       registrationUrl: "https://unitedtf.pushpress.com/landing/plans/plan_46371c20efce5f/login",
@@ -11,7 +11,7 @@ export const memberships = [
       ],
     },
     {
-      name: "High School Family",
+      name: "Monthly Family Membership",
       price: "$106.25",
       billing: "/ month",
       registrationUrl: "https://unitedtf.pushpress.com/landing/plans/plan_cf8ea387b9634b/eyJzdGFydF9kYXRlIjoiMDkvMDEvMjAyNiJ9/login",
@@ -23,26 +23,15 @@ export const memberships = [
       ],
     },
     {
-      name: "Middle School & Youth",
-      price: "$125",
+      name: "Monthly Membership Youth (3-6 years old)",
+      price: "$50.00",
       billing: "/ month",
-      registrationUrl: "https://unitedtf.pushpress.com/landing/plans/plan_afdefe3f67d342/eyJzdGFydF9kYXRlIjoiMDkvMDEvMjAyNiJ9/login",
+      registrationUrl: "https://unitedtf.pushpress.com/landing/plans/plan_55f99928c9e941",
       benefits: [
-        "Monthly United membership",
-        "Free access to workout plans",
-        "Free access to strength and conditioning workouts",
-      ],
-    },
-    {
-      name: "Middle School & Youth Family",
-      price: "$106.25",
-      billing: "/ month",
-      registrationUrl: "https://unitedtf.pushpress.com/landing/plans/plan_e1f62917c3ff4f/eyJzdGFydF9kYXRlIjoiMDkvMDEvMjAyNiJ9/login",
-      benefits: [
-        "Monthly United membership",
-        "Free access to workout plans",
-        "Free access to strength and conditioning workouts",
-        "Option available for multiple members of the same immediate family."
+        "Weekly beginner wrestling class",
+        "Build foundational wrestling skills",
+        "Fun, exciting, and age-appropriate practices",
+        "Perfect for children ages 3-6 who are new to wrestling",
       ],
     },
     {
