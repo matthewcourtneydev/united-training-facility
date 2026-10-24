@@ -70,10 +70,10 @@ export default function RafflePage() {
           <Reveal delay={0.4}>
             <div className="mt-10 flex flex-wrap gap-4">
               <a
-                href="#raffle-order"
+                href="#prizes"
                 className="bg-[var(--primary)] px-7 py-4 text-sm font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:-translate-y-0.5 hover:brightness-110"
               >
-                Purchase Raffle Tickets →
+                Raffle Detauls →
               </a>
 
               <a

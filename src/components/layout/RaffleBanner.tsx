@@ -12,7 +12,7 @@ export default function RaffleBanner() {
   return (
     <div className="relative border-b border-white/10 bg-[#123d7a] text-white">
       <Link
-        href="/raffle#raffle-order"
+        href="/raffle"
         aria-label="Click here to get your United raffle tickets"
         className="group block transition-colors duration-300 hover:bg-white/[0.08]"
       >
