@@ -115,8 +115,8 @@ export default async function SchedulePage() {
               </h2>
 
               <p className="mt-5 max-w-md text-base leading-7 text-neutral-600 sm:text-lg">
-                Consistent training, focused coaching, and one room committed
-                to getting better.
+                Consistent training, focused coaching, and one room committed to
+                getting better.
               </p>
             </div>
 
@@ -130,13 +130,24 @@ export default async function SchedulePage() {
                     {practice.day}
                   </h3>
 
-                  <p className="text-base font-bold text-black">
-                    {practice.time}
-                  </p>
+                  <div className="space-y-2">
+                    {practice.time.split(" | ").map((time) => (
+                      <p key={time} className="text-base font-bold text-black">
+                        {time}
+                      </p>
+                    ))}
+                  </div>
 
-                  <p className="text-sm leading-6 text-neutral-600">
-                    {practice.groups.join(" • ")}
-                  </p>
+                  <div className="space-y-2">
+                    {practice.groups.map((group) => (
+                      <p
+                        key={group}
+                        className="text-sm leading-6 text-neutral-600"
+                      >
+                        {group}
+                      </p>
+                    ))}
+                  </div>
                 </article>
               ))}
             </div>
@@ -206,11 +217,7 @@ export default async function SchedulePage() {
                       </div>
 
                       <p className="text-sm font-bold uppercase tracking-[0.1em] text-neutral-300">
-                        {formatEventTime(
-                          event.start,
-                          event.end,
-                          event.allDay,
-                        )}
+                        {formatEventTime(event.start, event.end, event.allDay)}
                       </p>
                     </article>
                   ))}

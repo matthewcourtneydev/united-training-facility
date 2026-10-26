@@ -11,13 +11,21 @@ export const weeklySchedule = [
     },
     {
       day: "Tuesday",
-      time: "6:00–7:45 PM",
-      groups: ["Advanced Elementary", "Junior High"],
+      time: "6:00–7:30 PM",
+      groups: ["Advanced Elementary & Junior High"],
     },
     {
       day: "Wednesday",
       time: "6:00–7:45 PM",
       groups: ["High School"],
+    },
+    {
+      day: "Thursday",
+      time: "5:15–6:00 PM | 6:00–7:30 PM",
+      groups: [
+        "Ages 3–6",
+        "Advanced Elementary & Junior High",
+      ],
     },
     {
       day: "Saturday",
