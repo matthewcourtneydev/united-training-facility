@@ -6,7 +6,7 @@ export const weeklySchedule = [
     },
     {
       day: "Monday",
-      time: "6:00–7:45 PM",
+      time: "6:30–8:00 PM",
       groups: ["High School"],
     },
     {
@@ -16,7 +16,7 @@ export const weeklySchedule = [
     },
     {
       day: "Wednesday",
-      time: "6:00–7:45 PM",
+      time: "6:30–8:00 PM",
       groups: ["High School"],
     },
     {
@@ -29,7 +29,7 @@ export const weeklySchedule = [
     },
     {
       day: "Saturday",
-      time: "8:15–9:00 AM",
+      time: "8:15–9:15 AM",
       groups: ["All ages welcome", "Strength & Conditioning"],
     },
   ];
