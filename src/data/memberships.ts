@@ -49,7 +49,7 @@ export const memberships = [
       name: "Drop-In",
       price: "$20",
       billing: "/ session",
-      registrationUrl: "https://unitedtf.pushpress.com/landing/plans/plan_0e3d480b534a42/eyJzdGFydF9kYXRlIjoiMDkvMDEvMjAyNiJ9/login",
+      registrationUrl: "https://unitedtf.pushpress.com/landing/plans/plan_2157735847d448/login",
       benefits: ["Access to one practice"],
     },
   ];
